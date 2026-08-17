@@ -8,6 +8,8 @@ frontend/node_modules/
 # Production Builds
 dist/
 frontend/dist/
+.vite/
+frontend/.vite/
 backend/public/build/
 backend/public/hot/
 backend/public/storage/
