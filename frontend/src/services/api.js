@@ -150,6 +150,18 @@ function handleMockFallback(endpoint, method, data) {
           break;
         }
 
+        case '/onboarding/setup':
+        case '/onboarding/business-info':
+        case '/onboarding/preferences':
+        case '/onboarding/complete':
+          resolve({
+            status: 'success',
+            message: 'Onboarding step saved successfully (Mock mode)',
+            data: data || {},
+            isMock: true,
+          });
+          break;
+
         case '/auth/logout':
           resolve({ message: 'Logged out successfully' });
           break;
