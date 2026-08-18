@@ -109,10 +109,28 @@ function handleMockFallback(endpoint, method, data) {
           break;
         }
 
-        case '/auth/forgot-password':
+        case '/auth/forgot-password': {
+          const email = (data?.email || '').toLowerCase().trim();
+          if (email.includes('notfound') || email.includes('unknown') || email === 'test@test.com') {
+            const err = new Error('We could not find an account associated with this email address. Please verify and try again.');
+            err.status = 422;
+            err.errors = { email: ['We could not find an account associated with this email address. Please verify and try again.'] };
+            reject(err);
+            break;
+          }
           resolve({
             status: 'success',
             message: 'Password reset link sent to your email! (Mock mode)',
+            reset_token: 'mock_reset_token_' + Math.random().toString(36).substring(2),
+            isMock: true,
+          });
+          break;
+        }
+
+        case '/auth/reset-password':
+          resolve({
+            status: 'success',
+            message: 'Password reset successful! You can now log in. (Mock mode)',
             isMock: true,
           });
           break;

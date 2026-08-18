@@ -158,13 +158,12 @@ export const LoginPage = () => {
                   <span className="text-sm font-normal text-[#777c80]">Remember me</span>
                 </label>
 
-                <button
-                  type="button"
+                <Link
+                  to="/forgot-password"
                   className="font-['Inter'] font-medium text-sm text-[#2563eb] hover:text-blue-700 hover:underline cursor-pointer transition-colors"
-                  onClick={() => setIsForgotModalOpen(true)}
                 >
                   Forgot password ?
-                </button>
+                </Link>
               </div>
 
               {/* Primary Login Button (Node 404:361) */}

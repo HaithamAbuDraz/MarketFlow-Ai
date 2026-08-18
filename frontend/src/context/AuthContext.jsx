@@ -68,6 +68,10 @@ export const AuthProvider = ({ children }) => {
     return await authService.forgotPassword(email);
   };
 
+  const resetPassword = async (token, email, password, passwordConfirmation) => {
+    return await authService.resetPassword(token, email, password, passwordConfirmation);
+  };
+
   const value = useMemo(
     () => ({
       user,
@@ -81,6 +85,7 @@ export const AuthProvider = ({ children }) => {
       register,
       logout,
       forgotPassword,
+      resetPassword,
     }),
     [user, token, isLoading]
   );

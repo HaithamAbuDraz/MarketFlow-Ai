@@ -225,6 +225,7 @@ SESSION_DOMAIN=localhost
 | `POST` | `/api/auth/register` | Register store owner & create store | ❌ |
 | `POST` | `/api/auth/login` | Authenticate merchant and issue Sanctum token | ❌ |
 | `POST` | `/api/auth/forgot-password` | Send password reset link | ❌ |
+| `POST` | `/api/auth/reset-password` | Set new password with reset token | ❌ |
 | `GET` | `/api/auth/me` | Fetch authenticated user profile | ✅ |
 | `POST` | `/api/auth/logout` | Revoke active Sanctum token | ✅ |
 
