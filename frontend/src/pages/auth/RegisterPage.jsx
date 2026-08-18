@@ -103,6 +103,42 @@ export const RegisterPage = () => {
     setCanResend(false);
   };
 
+  const handleStartOnboarding = () => {
+    const cleanStoreName = formData.storeName.trim();
+    const cleanSlug = cleanStoreName.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const freshDraft = {
+      step: 1,
+      data: {
+        storeName: cleanStoreName,
+        storeSlug: cleanSlug,
+        isSlugManual: false,
+        storeLogo: null,
+        storeLogoFile: null,
+        theme: 'modern',
+        businessCategory: '',
+        businessDescription: '',
+        businessType: '',
+        targetAudience: '',
+        language: 'en-US',
+        currency: 'USD',
+        timeZone: 'UTC+03:00',
+        unitSystem: 'metric-dmy',
+        userEmail: formData.email,
+      },
+      timestamp: new Date().toISOString(),
+    };
+
+    localStorage.setItem('marketflow_onboarding_draft', JSON.stringify(freshDraft));
+    navigate('/onboarding', {
+      state: {
+        newRegistration: true,
+        storeName: cleanStoreName,
+        email: formData.email,
+      },
+    });
+  };
+
   return (
     <div className="flex flex-col lg:flex-row h-screen w-full overflow-hidden bg-[#060c1c]">
       {/* Left Column: Figma 3D Hero Banner */}
@@ -138,7 +174,7 @@ export const RegisterPage = () => {
           <AccountReadyStep
             storeName={formData.storeName}
             email={formData.email}
-            onSetupStore={() => navigate('/dashboard')}
+            onSetupStore={handleStartOnboarding}
           />
         )}
       </div>
