@@ -1,0 +1,9 @@
+export { DashboardSidebar } from './DashboardSidebar';
+export { DashboardHeader } from './DashboardHeader';
+export { KpiMetricsGrid } from './KpiMetricsGrid';
+export { SalesChartSection } from './SalesChartSection';
+export { AiInsightsSection } from './AiInsightsSection';
+export { TopProductsSection } from './TopProductsSection';
+export { LowStockAlertsSection } from './LowStockAlertsSection';
+export { RecentOrdersSection } from './RecentOrdersSection';
+export { AiFloatingWidget } from './AiFloatingWidget';
