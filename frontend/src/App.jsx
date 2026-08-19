@@ -4,6 +4,8 @@ import { LoginPage } from '@/pages/auth/LoginPage';
 import { RegisterPage } from '@/pages/auth/RegisterPage';
 import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage';
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage';
+import { DashboardPage } from '@/pages/dashboard/DashboardPage';
+import { ProtectedRoute } from '@/components/common';
 
 export const App = () => {
   return (
@@ -22,11 +24,23 @@ export const App = () => {
         {/* Onboarding Flow */}
         <Route path="/onboarding" element={<OnboardingPage />} />
 
+        {/* Merchant Dashboard (Protected) */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+
         {/* Catch-all fallback */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </div>
   );
 };
+
+
 
 export default App;
