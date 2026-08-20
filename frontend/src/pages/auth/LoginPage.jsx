@@ -17,25 +17,53 @@ export const LoginPage = () => {
     rememberMe: false,
   });
 
+  const [fieldErrors, setFieldErrors] = useState({});
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [isMockMode, setIsMockMode] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
 
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => {
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
+    }
+    if (error) {
+      setError('');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccessMsg('');
+    setFieldErrors({});
 
-    if (!formData.email || !formData.password) {
-      setError('Please enter both your email and password.');
+    const newFieldErrors = {};
+    if (!formData.email.trim()) {
+      newFieldErrors.email = 'Please enter your email address.';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email.trim())) {
+      newFieldErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!formData.password) {
+      newFieldErrors.password = 'Please enter your password.';
+    }
+
+    if (Object.keys(newFieldErrors).length > 0) {
+      setFieldErrors(newFieldErrors);
+      setError(Object.values(newFieldErrors)[0]);
       return;
     }
 
     try {
       setIsSubmitting(true);
-      const res = await login(formData.email, formData.password);
+      const res = await login(formData.email.trim(), formData.password);
       setIsMockMode(!!res.isMock);
       setSuccessMsg(
         `Welcome back, ${res.user?.store_name || res.user?.name || res.user?.email}! Redirecting to Dashboard...`
@@ -44,7 +72,23 @@ export const LoginPage = () => {
         navigate('/dashboard');
       }, 500);
     } catch (err) {
-      setError(err.message || 'Invalid email or password.');
+      const msg = err.message || 'Invalid email or password.';
+      setError(msg);
+
+      if (err.errors && typeof err.errors === 'object') {
+        const serverFieldErrors = {};
+        if (err.errors.email) {
+          serverFieldErrors.email = Array.isArray(err.errors.email)
+            ? err.errors.email[0]
+            : err.errors.email;
+        }
+        if (err.errors.password) {
+          serverFieldErrors.password = Array.isArray(err.errors.password)
+            ? err.errors.password[0]
+            : err.errors.password;
+        }
+        setFieldErrors(serverFieldErrors);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -120,7 +164,7 @@ export const LoginPage = () => {
           )}
 
           {/* Login Form (Node 535:48033) */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-3.5">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 sm:gap-3.5">
             {/* Email Input Field (Node 535:48034) */}
             <InputField
               id="loginEmail"
@@ -129,7 +173,8 @@ export const LoginPage = () => {
               icon={Mail}
               placeholder="you@example.com"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) => handleInputChange('email', e.target.value)}
+              error={fieldErrors.email}
               inputClassName="h-[48px] sm:h-[46px] text-sm sm:text-sm"
               required
             />
@@ -142,7 +187,8 @@ export const LoginPage = () => {
               icon={Lock}
               placeholder="••••••••••••"
               value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              onChange={(e) => handleInputChange('password', e.target.value)}
+              error={fieldErrors.password}
               inputClassName="h-[48px] sm:h-[46px] text-sm sm:text-sm"
               required
             />

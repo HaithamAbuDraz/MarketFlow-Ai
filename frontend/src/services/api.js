@@ -36,17 +36,29 @@ export const apiClient = async (endpoint, { method = 'GET', data = null, headers
         window.dispatchEvent(new Event('auth:unauthorized'));
       }
 
-      let message = result.message || 'Request failed';
+      let message = result.message;
+      if (!message && result.error) {
+        message = typeof result.error === 'string' ? result.error : result.error.message;
+      }
       if (result.errors && typeof result.errors === 'object') {
         const firstErrorKey = Object.keys(result.errors)[0];
-        if (firstErrorKey && Array.isArray(result.errors[firstErrorKey])) {
-          message = result.errors[firstErrorKey][0];
+        if (firstErrorKey) {
+          const firstVal = result.errors[firstErrorKey];
+          const extracted = Array.isArray(firstVal) ? firstVal[0] : firstVal;
+          if (extracted && typeof extracted === 'string') {
+            message = extracted;
+          }
         }
+      }
+
+      if (!message) {
+        message = response.statusText || 'An unexpected error occurred. Please try again.';
       }
 
       const error = new Error(message);
       error.status = response.status;
       error.errors = result.errors || {};
+      error.raw = result;
       throw error;
     }
 

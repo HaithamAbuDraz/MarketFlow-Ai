@@ -53,7 +53,7 @@ export const RegisterForm = ({
         )}
 
         {/* Form */}
-        <form onSubmit={onSubmit} className="flex flex-col gap-3">
+        <form onSubmit={onSubmit} noValidate className="flex flex-col gap-3">
           {/* Store Name */}
           <InputField
             id="regStoreName"
@@ -63,7 +63,7 @@ export const RegisterForm = ({
             value={formData.storeName}
             onChange={(e) => handleChange('storeName', e.target.value)}
             inputClassName="h-[46px] sm:h-[42px]"
-            error={fieldErrors.store_name?.[0]}
+            error={Array.isArray(fieldErrors.store_name) ? fieldErrors.store_name[0] : fieldErrors.store_name}
             required
           />
 
@@ -77,7 +77,7 @@ export const RegisterForm = ({
             value={formData.email}
             onChange={(e) => handleChange('email', e.target.value)}
             inputClassName="h-[46px] sm:h-[42px]"
-            error={fieldErrors.email?.[0]}
+            error={Array.isArray(fieldErrors.email) ? fieldErrors.email[0] : fieldErrors.email}
             required
           />
 
@@ -92,6 +92,7 @@ export const RegisterForm = ({
               value={formData.password}
               onChange={(e) => handleChange('password', e.target.value)}
               inputClassName="h-[46px] sm:h-[42px]"
+              error={Array.isArray(fieldErrors.password) ? fieldErrors.password[0] : fieldErrors.password}
               required
             />
 
@@ -105,9 +106,10 @@ export const RegisterForm = ({
               onChange={(e) => handleChange('confirmPassword', e.target.value)}
               inputClassName="h-[46px] sm:h-[42px]"
               error={
-                formData.confirmPassword && formData.password !== formData.confirmPassword
+                (Array.isArray(fieldErrors.confirmPassword) ? fieldErrors.confirmPassword[0] : fieldErrors.confirmPassword) ||
+                (formData.confirmPassword && formData.password !== formData.confirmPassword
                   ? 'Passwords do not match'
-                  : undefined
+                  : undefined)
               }
               required
             />

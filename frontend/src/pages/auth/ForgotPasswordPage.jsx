@@ -28,6 +28,7 @@ export const ForgotPasswordPage = () => {
 
   // UI status states
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resendTimer, setResendTimer] = useState(59);
   const [canResend, setCanResend] = useState(false);
@@ -63,15 +64,24 @@ export const ForgotPasswordPage = () => {
   const handleRequestResetLink = async (e) => {
     e.preventDefault();
     setError('');
+    setFieldErrors({});
 
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
+      setFieldErrors({ email: 'Please enter your email address.' });
+      setError('Please enter your email address.');
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(trimmedEmail)) {
+      setFieldErrors({ email: 'Please provide a valid email address.' });
       setError('Please provide a valid email address.');
       return;
     }
 
     try {
       setIsSubmitting(true);
-      const res = await forgotPassword(email);
+      const res = await forgotPassword(trimmedEmail);
       if (res?.reset_token) {
         setResetToken(res.reset_token);
       }
@@ -80,6 +90,9 @@ export const ForgotPasswordPage = () => {
       setCanResend(false);
     } catch (err) {
       setError(err.message || 'Failed to send password reset link. Please try again.');
+      if (err.errors) {
+        setFieldErrors(err.errors);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -91,7 +104,8 @@ export const ForgotPasswordPage = () => {
     try {
       setIsSubmitting(true);
       setError('');
-      const res = await forgotPassword(email);
+      setFieldErrors({});
+      const res = await forgotPassword(email.trim());
       if (res?.reset_token) {
         setResetToken(res.reset_token);
       }
@@ -108,14 +122,24 @@ export const ForgotPasswordPage = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setError('');
+    setFieldErrors({});
 
-    if (!newPassword || newPassword.length < 8) {
-      setError('Password must be at least 8 characters long.');
-      return;
+    const newErrors = {};
+    if (!newPassword) {
+      newErrors.newPassword = 'Password is required.';
+    } else if (newPassword.length < 8) {
+      newErrors.newPassword = 'Password must be at least 8 characters long.';
     }
 
-    if (newPassword !== confirmPassword) {
-      setError('Passwords do not match. Please verify.');
+    if (!confirmPassword) {
+      newErrors.confirmPassword = 'Please confirm your password.';
+    } else if (newPassword !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match. Please verify.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setFieldErrors(newErrors);
+      setError(Object.values(newErrors)[0]);
       return;
     }
 
@@ -130,6 +154,9 @@ export const ForgotPasswordPage = () => {
       setStep('SUCCESS');
     } catch (err) {
       setError(err.message || 'Failed to reset password. The link may have expired.');
+      if (err.errors) {
+        setFieldErrors(err.errors);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -180,7 +207,7 @@ export const ForgotPasswordPage = () => {
                 )}
 
                 {/* Email Form */}
-                <form onSubmit={handleRequestResetLink} className="flex flex-col gap-4 sm:gap-3.5">
+                <form onSubmit={handleRequestResetLink} noValidate className="flex flex-col gap-4 sm:gap-3.5">
                   <InputField
                     id="resetEmail"
                     label="Email"
@@ -188,7 +215,12 @@ export const ForgotPasswordPage = () => {
                     icon={Mail}
                     placeholder="you@example.com"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: '' }));
+                      if (error) setError('');
+                    }}
+                    error={Array.isArray(fieldErrors.email) ? fieldErrors.email[0] : fieldErrors.email}
                     inputClassName="h-[48px] sm:h-[46px] text-sm"
                     required
                     autoFocus
@@ -250,28 +282,26 @@ export const ForgotPasswordPage = () => {
                     className="w-full h-[42px] bg-slate-50 dark:bg-[#0b1633] hover:bg-slate-100 dark:hover:bg-[#122244] border border-[#e2e8f0] dark:border-[#1e3a75] text-slate-700 dark:text-slate-200 font-medium text-xs rounded-[8px] flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                   >
                     <Sparkles size={14} className="text-[#0ea2f2]" />
-                    <span>Set new password now (Direct Link)</span>
+                    <span>Simulate Reset Token Link (Testing)</span>
                   </button>
                 </div>
 
-                {/* Resend Countdown */}
-                <div className="text-xs text-[#475569] dark:text-slate-400">
+                {/* Resend Link Section */}
+                <div className="text-xs text-[#64748b] dark:text-slate-400">
+                  <span>Didn't receive the email? </span>
                   {canResend ? (
-                    <p>
-                      Didn't receive the email?{' '}
-                      <button
-                        type="button"
-                        onClick={handleResend}
-                        disabled={isSubmitting}
-                        className="font-semibold text-[#2563eb] dark:text-[#38bdf8] hover:underline cursor-pointer ml-1"
-                      >
-                        Click to resend
-                      </button>
-                    </p>
+                    <button
+                      type="button"
+                      onClick={handleResend}
+                      disabled={isSubmitting}
+                      className="font-semibold text-[#2563eb] dark:text-[#38bdf8] hover:underline cursor-pointer disabled:opacity-50"
+                    >
+                      Click to resend
+                    </button>
                   ) : (
-                    <p className="text-slate-400 dark:text-slate-500">
-                      Resend link in 00:{resendTimer < 10 ? `0${resendTimer}` : resendTimer}
-                    </p>
+                    <span className="text-[#94a3b8] dark:text-slate-500 font-medium">
+                      Resend code in <strong className="text-[#2563eb] dark:text-[#38bdf8] font-semibold">{resendTimer}s</strong>
+                    </span>
                   )}
                 </div>
               </div>
@@ -304,7 +334,7 @@ export const ForgotPasswordPage = () => {
                 )}
 
                 {/* Reset Form */}
-                <form onSubmit={handleResetPassword} className="flex flex-col gap-3.5">
+                <form onSubmit={handleResetPassword} noValidate className="flex flex-col gap-3.5">
                   <InputField
                     id="newPassword"
                     label="New Password"
@@ -312,7 +342,12 @@ export const ForgotPasswordPage = () => {
                     icon={Lock}
                     placeholder="••••••••••••"
                     value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
+                    onChange={(e) => {
+                      setNewPassword(e.target.value);
+                      if (fieldErrors.newPassword) setFieldErrors((prev) => ({ ...prev, newPassword: '' }));
+                      if (error) setError('');
+                    }}
+                    error={Array.isArray(fieldErrors.newPassword) ? fieldErrors.newPassword[0] : fieldErrors.newPassword}
                     inputClassName="h-[48px] sm:h-[46px] text-sm"
                     required
                     autoFocus
@@ -328,7 +363,12 @@ export const ForgotPasswordPage = () => {
                     icon={Lock}
                     placeholder="••••••••••••"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      if (fieldErrors.confirmPassword) setFieldErrors((prev) => ({ ...prev, confirmPassword: '' }));
+                      if (error) setError('');
+                    }}
+                    error={Array.isArray(fieldErrors.confirmPassword) ? fieldErrors.confirmPassword[0] : fieldErrors.confirmPassword}
                     inputClassName="h-[48px] sm:h-[46px] text-sm"
                     required
                   />

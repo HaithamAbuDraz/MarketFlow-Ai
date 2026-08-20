@@ -49,20 +49,27 @@ export const RegisterPage = () => {
   }, [step, resendTimer]);
 
   const validateClientSide = () => {
-    if (!formData.storeName.trim()) return 'Please enter your store name.';
-    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
-      return 'Please enter a valid email address.';
+    const errors = {};
+    if (!formData.storeName.trim()) {
+      errors.store_name = 'Please enter your store name.';
     }
-    if (formData.password.length < 8) {
-      return 'Password must be at least 8 characters long.';
+    if (!formData.email.trim()) {
+      errors.email = 'Please enter your email address.';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email.trim())) {
+      errors.email = 'Please enter a valid email address.';
     }
-    if (formData.password !== formData.confirmPassword) {
-      return 'Passwords do not match.';
+    if (!formData.password) {
+      errors.password = 'Please create a password.';
+    } else if (formData.password.length < 8) {
+      errors.password = 'Password must be at least 8 characters long.';
+    }
+    if (formData.password && formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match.';
     }
     if (!formData.agreeTerms) {
-      return 'Please accept the Terms & Conditions and Privacy Policy.';
+      errors.agreeTerms = 'Please accept the Terms & Conditions and Privacy Policy.';
     }
-    return null;
+    return errors;
   };
 
   const handleSubmit = async (e) => {
@@ -70,9 +77,10 @@ export const RegisterPage = () => {
     setError('');
     setFieldErrors({});
 
-    const clientError = validateClientSide();
-    if (clientError) {
-      setError(clientError);
+    const clientErrors = validateClientSide();
+    if (Object.keys(clientErrors).length > 0) {
+      setFieldErrors(clientErrors);
+      setError(Object.values(clientErrors)[0]);
       return;
     }
 
