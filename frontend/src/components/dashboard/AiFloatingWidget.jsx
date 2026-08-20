@@ -67,9 +67,9 @@ export const AiFloatingWidget = ({ storeName }) => {
 
       {/* Floating Interactive Chat Modal */}
       {isOpen && (
-        <div className="fixed bottom-22 right-6 w-[360px] sm:w-[400px] bg-white rounded-2xl shadow-2xl border border-slate-200/80 overflow-hidden z-40 animate-modal-in flex flex-col h-[480px]">
+        <div className="fixed bottom-22 right-6 w-[360px] sm:w-[400px] bg-white dark:bg-[#091530] rounded-2xl shadow-2xl border border-slate-200/80 dark:border-[#1e3a75] overflow-hidden z-40 animate-modal-in flex flex-col h-[480px]">
           {/* Modal Header */}
-          <div className="bg-gradient-to-r from-[#070e20] to-[#0d1c42] p-4 text-white flex items-center justify-between">
+          <div className="bg-gradient-to-r from-[#070e20] to-[#0d1c42] p-4 text-white flex items-center justify-between border-b border-[#142347]">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-[#38bdf8]">
                 <Bot size={18} />
@@ -92,7 +92,7 @@ export const AiFloatingWidget = ({ storeName }) => {
           </div>
 
           {/* Messages Body */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-[#f8fafc] text-xs">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-[#f8fafc] dark:bg-[#060c1d] text-xs">
             {messages.map((m) => (
               <div
                 key={m.id}
@@ -101,7 +101,7 @@ export const AiFloatingWidget = ({ storeName }) => {
                 }`}
               >
                 {m.sender === 'ai' && (
-                  <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">
                     ✦
                   </div>
                 )}
@@ -109,7 +109,7 @@ export const AiFloatingWidget = ({ storeName }) => {
                   className={`p-3 rounded-xl max-w-[80%] leading-relaxed ${
                     m.sender === 'user'
                       ? 'bg-[#2563eb] text-white rounded-tr-xs'
-                      : 'bg-white text-slate-800 border border-slate-200/80 shadow-xs rounded-tl-xs'
+                      : 'bg-white dark:bg-[#0c1836] text-slate-800 dark:text-slate-100 border border-slate-200/80 dark:border-[#1e3a75] shadow-xs rounded-tl-xs'
                   }`}
                 >
                   {m.text}
@@ -119,31 +119,31 @@ export const AiFloatingWidget = ({ storeName }) => {
           </div>
 
           {/* Quick Prompts */}
-          <div className="px-3 py-1.5 bg-slate-100/70 border-t border-slate-200/50 flex items-center gap-1.5 overflow-x-auto no-scrollbar text-[10px]">
+          <div className="px-3 py-1.5 bg-slate-100/70 dark:bg-[#091530] border-t border-slate-200/50 dark:border-[#1e3a75]/60 flex items-center gap-1.5 overflow-x-auto no-scrollbar text-[10px]">
             <button
               type="button"
               onClick={() => setInput('How do I add products?')}
-              className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-full text-slate-600 shrink-0 cursor-pointer"
+              className="px-2.5 py-1 bg-white dark:bg-[#0c1836] hover:bg-slate-50 dark:hover:bg-[#122244] border border-slate-200 dark:border-[#1e3a75] rounded-full text-slate-600 dark:text-slate-300 shrink-0 cursor-pointer transition-colors"
             >
               💡 How do I add products?
             </button>
             <button
               type="button"
               onClick={() => setInput('Optimize my store SEO')}
-              className="px-2.5 py-1 bg-white hover:bg-slate-50 border border-slate-200 rounded-full text-slate-600 shrink-0 cursor-pointer"
+              className="px-2.5 py-1 bg-white dark:bg-[#0c1836] hover:bg-slate-50 dark:hover:bg-[#122244] border border-slate-200 dark:border-[#1e3a75] rounded-full text-slate-600 dark:text-slate-300 shrink-0 cursor-pointer transition-colors"
             >
               🚀 Store SEO tips
             </button>
           </div>
 
           {/* Input Form */}
-          <form onSubmit={handleSend} className="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
+          <form onSubmit={handleSend} className="p-3 bg-white dark:bg-[#091530] border-t border-slate-100 dark:border-[#142347] flex items-center gap-2">
             <input
               type="text"
               placeholder="Ask anything about your store..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 h-9 px-3 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="flex-1 h-9 px-3 text-xs bg-slate-50 dark:bg-[#0c1836] border border-slate-200 dark:border-[#1e3a75] rounded-lg text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             <button
               type="submit"

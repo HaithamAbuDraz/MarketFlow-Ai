@@ -252,7 +252,7 @@ export const OnboardingPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#f8fafc] flex flex-col relative font-sans selection:bg-blue-100 selection:text-blue-900">
+    <div className="min-h-screen w-full bg-[#f8fafc] dark:bg-[#060b18] text-slate-900 dark:text-slate-100 flex flex-col relative font-sans selection:bg-blue-100 dark:selection:bg-blue-950 selection:text-blue-900 dark:selection:text-blue-200 transition-colors duration-200">
       {/* Top Header with Logo and Save & Exit */}
       <OnboardingHeader onSaveAndExit={() => setIsSaveModalOpen(true)} />
 

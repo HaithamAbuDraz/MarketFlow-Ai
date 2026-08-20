@@ -75,42 +75,42 @@ export const RecentOrdersSection = ({
     switch (type) {
       case 'success':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-500/30">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             <span>{status}</span>
           </span>
         );
       case 'info':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200/60">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-500/30">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
             <span>{status}</span>
           </span>
         );
       case 'warning':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/60 dark:border-amber-500/30">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
             <span>{status}</span>
           </span>
         );
       case 'pending':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
             <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
             <span>{status}</span>
           </span>
         );
       case 'danger':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/60">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/60 dark:border-rose-500/30">
             <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
             <span>{status}</span>
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-50 text-slate-600">
+          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
             {status}
           </span>
         );
@@ -119,16 +119,16 @@ export const RecentOrdersSection = ({
 
   return (
     <div
-      className="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between"
+      className="bg-white dark:bg-[#091530] rounded-xl border border-slate-200/80 dark:border-[#173066] p-5 shadow-xs flex flex-col justify-between transition-colors duration-200"
       data-node-id="719:9051"
     >
       {/* Header */}
-      <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
+      <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 dark:border-[#14264e]">
         <div>
-          <h3 className="font-bold text-base text-[#0f172a] tracking-tight">
+          <h3 className="font-bold text-base text-[#0f172a] dark:text-white tracking-tight">
             Recent Orders
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Latest orders and status
           </p>
         </div>
@@ -136,7 +136,7 @@ export const RecentOrdersSection = ({
         <button
           type="button"
           onClick={onViewAllOrders}
-          className="px-3 py-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 rounded-md transition-colors cursor-pointer"
+          className="px-3 py-1 bg-slate-50 dark:bg-[#0b1633] hover:bg-slate-100 dark:hover:bg-[#122244] border border-slate-200 dark:border-[#1e3a75] text-xs font-semibold text-slate-700 dark:text-slate-200 rounded-md transition-colors cursor-pointer"
         >
           View All Orders
         </button>
@@ -146,7 +146,7 @@ export const RecentOrdersSection = ({
       <div className="overflow-x-auto my-1.5">
         <table className="w-full text-left border-collapse min-w-[700px]">
           <thead>
-            <tr className="text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+            <tr className="text-[11px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-[#14264e]">
               <th className="py-2.5 pl-2 w-32">Order ID</th>
               <th className="py-2.5 w-48">Customer</th>
               <th className="py-2.5">Product</th>
@@ -159,24 +159,24 @@ export const RecentOrdersSection = ({
             {isLoading ? (
               /* Skeleton Loading Order Rows */
               [1, 2, 3, 4, 5, 6].map((i) => (
-                <tr key={i} className="border-b border-slate-50 animate-pulse">
+                <tr key={i} className="border-b border-slate-50 dark:border-[#14264e]/50 animate-pulse">
                   <td className="py-3 pl-2">
-                    <div className="h-3.5 bg-slate-200 rounded-md w-20" />
+                    <div className="h-3.5 bg-slate-200 dark:bg-[#142347] rounded-md w-20" />
                   </td>
                   <td className="py-3">
-                    <div className="h-3.5 bg-slate-200 rounded-md w-28" />
+                    <div className="h-3.5 bg-slate-200 dark:bg-[#142347] rounded-md w-28" />
                   </td>
                   <td className="py-3">
-                    <div className="h-3.5 bg-slate-200 rounded-md w-36" />
+                    <div className="h-3.5 bg-slate-200 dark:bg-[#142347] rounded-md w-36" />
                   </td>
                   <td className="py-3 text-right">
-                    <div className="h-3.5 bg-slate-200 rounded-md w-14 ml-auto" />
+                    <div className="h-3.5 bg-slate-200 dark:bg-[#142347] rounded-md w-14 ml-auto" />
                   </td>
                   <td className="py-3 text-center">
-                    <div className="h-5 bg-slate-200 rounded-full w-20 mx-auto" />
+                    <div className="h-5 bg-slate-200 dark:bg-[#142347] rounded-full w-20 mx-auto" />
                   </td>
                   <td className="py-3 text-right pr-2">
-                    <div className="h-3.5 bg-slate-200 rounded-md w-20 ml-auto" />
+                    <div className="h-3.5 bg-slate-200 dark:bg-[#142347] rounded-md w-20 ml-auto" />
                   </td>
                 </tr>
               ))
@@ -185,24 +185,24 @@ export const RecentOrdersSection = ({
               displayOrders.map((o) => (
                 <tr
                   key={o.id}
-                  className="border-b border-slate-50 hover:bg-slate-50/70 transition-colors text-xs"
+                  className="border-b border-slate-50 dark:border-[#14264e]/50 hover:bg-slate-50/70 dark:hover:bg-[#112248]/50 transition-colors text-xs"
                 >
-                  <td className="py-3 pl-2 font-mono font-medium text-slate-600">
+                  <td className="py-3 pl-2 font-mono font-medium text-slate-600 dark:text-slate-300">
                     {o.order_number}
                   </td>
-                  <td className="py-3 font-semibold text-[#0f172a]">
+                  <td className="py-3 font-semibold text-[#0f172a] dark:text-white">
                     {o.customer_name}
                   </td>
-                  <td className="py-3 text-slate-600 font-medium">
+                  <td className="py-3 text-slate-600 dark:text-slate-300 font-medium">
                     {o.product_name}
                   </td>
-                  <td className="py-3 text-right font-bold text-[#0f172a]">
+                  <td className="py-3 text-right font-bold text-[#0f172a] dark:text-white">
                     {o.amount}
                   </td>
                   <td className="py-3 text-center">
                     {getStatusBadge(o.status, o.statusType)}
                   </td>
-                  <td className="py-3 text-right pr-2 text-slate-400 font-medium">
+                  <td className="py-3 text-right pr-2 text-slate-400 dark:text-slate-400 font-medium">
                     {o.date}
                   </td>
                 </tr>

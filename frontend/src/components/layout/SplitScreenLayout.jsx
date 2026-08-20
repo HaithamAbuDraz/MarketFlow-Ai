@@ -66,7 +66,7 @@ export const SplitScreenLayout = ({
 
   return (
     <div
-      className={`flex flex-col md:flex-row min-h-screen md:h-screen w-full bg-white md:bg-[#060c1c] overflow-y-auto md:overflow-hidden ${containerClassName}`}
+      className={`flex flex-col md:flex-row min-h-screen md:h-screen w-full bg-white dark:bg-[#050a18] md:bg-[#060c1c] overflow-y-auto md:overflow-hidden transition-colors duration-200 ${containerClassName}`}
     >
       {/* Fixed Sticky Hero Banner Container (Desktop Only) */}
       <aside
@@ -79,7 +79,7 @@ export const SplitScreenLayout = ({
       {/* Main Content Side */}
       <main
         ref={scrollContainerRef}
-        className={`flex-1 w-full md:w-[52%] lg:w-[50%] xl:w-[48%] min-h-screen md:min-h-full bg-white sm:bg-[#f8f8fb] overflow-y-auto overflow-x-hidden md:custom-scrollbar no-scrollbar relative z-20 ${contentClassName}`}
+        className={`flex-1 w-full md:w-[52%] lg:w-[50%] xl:w-[48%] min-h-screen md:min-h-full bg-white dark:bg-[#070d1e] sm:bg-[#f8f8fb] sm:dark:bg-[#070d1e] overflow-y-auto overflow-x-hidden md:custom-scrollbar no-scrollbar relative z-20 transition-colors duration-200 ${contentClassName}`}
       >
         <div
           ref={zoomContentRef}

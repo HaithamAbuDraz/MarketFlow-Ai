@@ -136,15 +136,15 @@ export const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen w-full bg-white sm:bg-[#f8f8fb] lg:bg-[#060c1c] overflow-y-auto lg:overflow-hidden">
+    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen w-full bg-white dark:bg-[#050a18] sm:bg-[#f8f8fb] sm:dark:bg-[#070d1e] lg:bg-[#060c1c] overflow-y-auto lg:overflow-hidden transition-colors duration-200">
       {/* Left Column: Figma 3D Hero Banner (Hidden on Mobile < lg, Node 94:126) */}
       <HeroBanner />
 
       {/* Right Column: Responsive Form Container (Node 401:54) */}
-      <div className="flex-1 lg:flex-[0.95] flex flex-col items-center justify-between min-h-screen lg:min-h-full bg-white sm:bg-[#f8f8fb] px-4 py-6 sm:p-6 lg:p-8 overflow-y-auto no-scrollbar">
+      <div className="flex-1 lg:flex-[0.95] flex flex-col items-center justify-between min-h-screen lg:min-h-full bg-white dark:bg-[#070d1e] sm:bg-[#f8f8fb] sm:dark:bg-[#070d1e] px-4 py-6 sm:p-6 lg:p-8 overflow-y-auto no-scrollbar transition-colors duration-200">
         {/* Main Elevated Card */}
         <div 
-          className="w-full max-w-[360px] sm:max-w-[450px] bg-white sm:rounded-[16px] sm:p-8 sm:shadow-[0px_4px_20px_rgba(15,34,76,0.04)] sm:border sm:border-[#eaebf0]/60 my-auto flex flex-col justify-between animate-fade-in"
+          className="w-full max-w-[360px] sm:max-w-[450px] bg-white dark:bg-[#091530] sm:rounded-[16px] sm:p-8 sm:shadow-[0px_4px_20px_rgba(15,34,76,0.04)] sm:border sm:border-[#eaebf0]/60 sm:dark:border-[#173066] my-auto flex flex-col justify-between animate-fade-in transition-colors duration-200"
           data-node-id="401:54"
         >
           <div>
@@ -157,24 +157,24 @@ export const ForgotPasswordPage = () => {
             {step === 'EMAIL_ENTRY' && (
               <div>
                 {/* Header Icon Badge (Centered) */}
-                <div className="w-12 h-12 rounded-xl bg-[#eff6ff] text-[#2563eb] border border-[#dbeafe] flex items-center justify-center mx-auto mb-4 shadow-xs">
+                <div className="w-12 h-12 rounded-xl bg-[#eff6ff] dark:bg-[#0c1836] text-[#2563eb] dark:text-[#38bdf8] border border-[#dbeafe] dark:border-[#1e3a75] flex items-center justify-center mx-auto mb-4 shadow-xs">
                   <KeyRound size={22} className="stroke-[2.2]" />
                 </div>
 
                 {/* Title & Subtitle (Centered) */}
                 <div className="mb-5 text-center">
-                  <h2 className="font-['Inter'] font-bold text-[24px] sm:text-[28px] text-[#0f172a] tracking-tight leading-tight mb-2">
+                  <h2 className="font-['Inter'] font-bold text-[24px] sm:text-[28px] text-[#0f172a] dark:text-white tracking-tight leading-tight mb-2">
                     Forgot password?
                   </h2>
-                  <p className="font-['Inter'] font-medium text-xs sm:text-sm text-[#475569] leading-relaxed">
+                  <p className="font-['Inter'] font-medium text-xs sm:text-sm text-[#475569] dark:text-slate-400 leading-relaxed">
                     No worries, we'll send you reset instructions. Enter your registered store email below.
                   </p>
                 </div>
 
                 {/* Error Banner (Placed Below Icon & Header) */}
                 {error && (
-                  <div className="flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 p-3 rounded-lg text-xs mb-4 animate-fade-in text-left">
-                    <AlertCircle size={16} className="shrink-0 text-rose-600" />
+                  <div className="flex items-center gap-2 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-500/30 text-rose-700 dark:text-rose-300 p-3 rounded-lg text-xs mb-4 animate-fade-in text-left">
+                    <AlertCircle size={16} className="shrink-0 text-rose-600 dark:text-rose-400" />
                     <span className="font-medium">{error}</span>
                   </div>
                 )}
@@ -212,23 +212,23 @@ export const ForgotPasswordPage = () => {
             {step === 'EMAIL_SENT' && (
               <div className="flex flex-col items-center text-center pt-2">
                 {/* Illustration Badge (Centered) */}
-                <div className="w-[84px] h-[84px] sm:w-[88px] sm:h-[88px] rounded-full bg-[#38bdf8]/10 flex items-center justify-center mb-4 mx-auto">
+                <div className="w-[84px] h-[84px] sm:w-[88px] sm:h-[88px] rounded-full bg-[#38bdf8]/10 dark:bg-[#38bdf8]/20 flex items-center justify-center mb-4 mx-auto">
                   <img src={emailVerifyIcon} alt="Check Email" className="w-11 h-11 sm:w-12 sm:h-12 object-contain" />
                 </div>
 
                 {/* Title & Subtitle */}
-                <h2 className="font-['Inter'] font-bold text-2xl sm:text-[26px] text-[#0f172a] mb-2 tracking-tight">
+                <h2 className="font-['Inter'] font-bold text-2xl sm:text-[26px] text-[#0f172a] dark:text-white mb-2 tracking-tight">
                   Check your email
                 </h2>
-                <p className="font-['Inter'] text-xs sm:text-sm text-[#64748b] leading-relaxed max-w-xs mb-4">
+                <p className="font-['Inter'] text-xs sm:text-sm text-[#64748b] dark:text-slate-400 leading-relaxed max-w-xs mb-4">
                   We've sent a password reset link to:<br />
-                  <span className="font-semibold text-[#0f172a] text-sm block mt-1 break-all">{email}</span>
+                  <span className="font-semibold text-[#0f172a] dark:text-white text-sm block mt-1 break-all">{email}</span>
                 </p>
 
                 {/* Error Banner if any */}
                 {error && (
-                  <div className="flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 p-3 rounded-lg text-xs mb-4 w-full animate-fade-in text-left">
-                    <AlertCircle size={16} className="shrink-0 text-rose-600" />
+                  <div className="flex items-center gap-2 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-500/30 text-rose-700 dark:text-rose-300 p-3 rounded-lg text-xs mb-4 w-full animate-fade-in text-left">
+                    <AlertCircle size={16} className="shrink-0 text-rose-600 dark:text-rose-400" />
                     <span className="font-medium">{error}</span>
                   </div>
                 )}
@@ -247,7 +247,7 @@ export const ForgotPasswordPage = () => {
                   <button
                     type="button"
                     onClick={() => setStep('SET_NEW_PASSWORD')}
-                    className="w-full h-[42px] bg-slate-50 hover:bg-slate-100 border border-[#e2e8f0] text-slate-700 font-medium text-xs rounded-[8px] flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                    className="w-full h-[42px] bg-slate-50 dark:bg-[#0b1633] hover:bg-slate-100 dark:hover:bg-[#122244] border border-[#e2e8f0] dark:border-[#1e3a75] text-slate-700 dark:text-slate-200 font-medium text-xs rounded-[8px] flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                   >
                     <Sparkles size={14} className="text-[#0ea2f2]" />
                     <span>Set new password now (Direct Link)</span>
@@ -255,7 +255,7 @@ export const ForgotPasswordPage = () => {
                 </div>
 
                 {/* Resend Countdown */}
-                <div className="text-xs text-[#475569]">
+                <div className="text-xs text-[#475569] dark:text-slate-400">
                   {canResend ? (
                     <p>
                       Didn't receive the email?{' '}
@@ -263,13 +263,13 @@ export const ForgotPasswordPage = () => {
                         type="button"
                         onClick={handleResend}
                         disabled={isSubmitting}
-                        className="font-semibold text-[#2563eb] hover:underline cursor-pointer ml-1"
+                        className="font-semibold text-[#2563eb] dark:text-[#38bdf8] hover:underline cursor-pointer ml-1"
                       >
                         Click to resend
                       </button>
                     </p>
                   ) : (
-                    <p className="text-slate-400">
+                    <p className="text-slate-400 dark:text-slate-500">
                       Resend link in 00:{resendTimer < 10 ? `0${resendTimer}` : resendTimer}
                     </p>
                   )}
@@ -281,24 +281,24 @@ export const ForgotPasswordPage = () => {
             {step === 'SET_NEW_PASSWORD' && (
               <div>
                 {/* Header Icon Badge (Centered) */}
-                <div className="w-12 h-12 rounded-xl bg-[#eff6ff] text-[#2563eb] border border-[#dbeafe] flex items-center justify-center mx-auto mb-4 shadow-xs">
+                <div className="w-12 h-12 rounded-xl bg-[#eff6ff] dark:bg-[#0c1836] text-[#2563eb] dark:text-[#38bdf8] border border-[#dbeafe] dark:border-[#1e3a75] flex items-center justify-center mx-auto mb-4 shadow-xs">
                   <Lock size={22} className="stroke-[2.2]" />
                 </div>
 
                 {/* Title & Subtitle (Centered) */}
                 <div className="mb-5 text-center">
-                  <h2 className="font-['Inter'] font-bold text-[24px] sm:text-[28px] text-[#0f172a] tracking-tight leading-tight mb-2">
+                  <h2 className="font-['Inter'] font-bold text-[24px] sm:text-[28px] text-[#0f172a] dark:text-white tracking-tight leading-tight mb-2">
                     Set new password
                   </h2>
-                  <p className="font-['Inter'] font-medium text-xs sm:text-sm text-[#475569] leading-relaxed">
+                  <p className="font-['Inter'] font-medium text-xs sm:text-sm text-[#475569] dark:text-slate-400 leading-relaxed">
                     Your new password must be different to previously used passwords.
                   </p>
                 </div>
 
                 {/* Error Banner (Placed Below Icon & Header) */}
                 {error && (
-                  <div className="flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 p-3 rounded-lg text-xs mb-4 animate-fade-in text-left">
-                    <AlertCircle size={16} className="shrink-0 text-rose-600" />
+                  <div className="flex items-center gap-2 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-500/30 text-rose-700 dark:text-rose-300 p-3 rounded-lg text-xs mb-4 animate-fade-in text-left">
+                    <AlertCircle size={16} className="shrink-0 text-rose-600 dark:text-rose-400" />
                     <span className="font-medium">{error}</span>
                   </div>
                 )}
@@ -351,15 +351,15 @@ export const ForgotPasswordPage = () => {
             {step === 'SUCCESS' && (
               <div className="flex flex-col items-center text-center pt-2">
                 {/* Success Badge */}
-                <div className="w-[84px] h-[84px] sm:w-[88px] sm:h-[88px] rounded-full bg-[#e1ecfe] flex items-center justify-center mb-4 shadow-sm">
+                <div className="w-[84px] h-[84px] sm:w-[88px] sm:h-[88px] rounded-full bg-[#e1ecfe] dark:bg-blue-950/60 flex items-center justify-center mb-4 shadow-sm">
                   <img src={successCheckIcon} alt="Password Reset Success" className="w-11 h-11 sm:w-12 sm:h-12 object-contain" />
                 </div>
 
                 {/* Title & Subtitle */}
-                <h2 className="font-['Inter'] font-bold text-2xl sm:text-[26px] text-[#0f172a] mb-2 tracking-tight">
+                <h2 className="font-['Inter'] font-bold text-2xl sm:text-[26px] text-[#0f172a] dark:text-white mb-2 tracking-tight">
                   Password reset complete
                 </h2>
-                <p className="font-['Inter'] text-xs sm:text-sm text-[#64748b] leading-relaxed max-w-xs mb-6">
+                <p className="font-['Inter'] text-xs sm:text-sm text-[#64748b] dark:text-slate-400 leading-relaxed max-w-xs mb-6">
                   Your password has been successfully reset. You can now sign in with your new password.
                 </p>
 
@@ -377,10 +377,10 @@ export const ForgotPasswordPage = () => {
           </div>
 
           {/* Footer: Back to Login link (always accessible except on success) */}
-          <div className="text-center mt-6 pt-3 border-t border-slate-100/80">
+          <div className="text-center mt-6 pt-3 border-t border-slate-100/80 dark:border-[#142347]">
             <Link
               to="/login"
-              className="inline-flex items-center gap-1.5 font-semibold font-['Inter'] text-xs sm:text-sm text-[#475569] hover:text-[#2563eb] transition-colors"
+              className="inline-flex items-center gap-1.5 font-semibold font-['Inter'] text-xs sm:text-sm text-[#475569] dark:text-slate-400 hover:text-[#2563eb] dark:hover:text-[#38bdf8] transition-colors"
             >
               <ArrowLeft size={16} />
               <span>Back to log in</span>
@@ -389,8 +389,8 @@ export const ForgotPasswordPage = () => {
         </div>
 
         {/* Bottom Security Note */}
-        <div className="py-2 flex items-center justify-center gap-1.5 text-xs text-[#94a3b8]">
-          <ShieldCheck size={14} className="shrink-0 text-slate-400" />
+        <div className="py-2 flex items-center justify-center gap-1.5 text-xs text-[#94a3b8] dark:text-slate-500">
+          <ShieldCheck size={14} className="shrink-0 text-slate-400 dark:text-slate-500" />
           <span>MarketFlow AI Secure Authentication</span>
         </div>
       </div>
@@ -399,3 +399,4 @@ export const ForgotPasswordPage = () => {
 };
 
 export default ForgotPasswordPage;
+

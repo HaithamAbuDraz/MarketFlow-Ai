@@ -42,20 +42,20 @@ export const Step3BusinessInfo = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-[560px] bg-white rounded-[20px] p-6 sm:p-10 drop-shadow-[0px_8px_16px_rgba(15,23,42,0.06)] border border-[#e2e8f0]/80 flex flex-col gap-8 animate-modal-in"
+      className="w-full max-w-[560px] bg-white dark:bg-[#091530] rounded-[20px] p-6 sm:p-10 drop-shadow-[0px_8px_16px_rgba(15,23,42,0.06)] border border-[#e2e8f0]/80 dark:border-[#173066] flex flex-col gap-8 animate-modal-in transition-colors duration-200"
     >
       {/* Form Header */}
       <div className="flex flex-col gap-2">
-        <h2 className="text-2xl sm:text-[28px] font-bold text-[#0f172a] leading-tight">
+        <h2 className="text-2xl sm:text-[28px] font-bold text-[#0f172a] dark:text-white leading-tight">
           Tell us about your business
         </h2>
-        <p className="text-sm sm:text-[16px] text-[#475569] leading-relaxed">
+        <p className="text-sm sm:text-[16px] text-[#475569] dark:text-slate-400 leading-relaxed">
           Help us understand your business so we can personalize your experience.
         </p>
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs sm:text-sm">
+        <div className="flex items-center gap-2 p-3 bg-red-50 dark:bg-rose-950/60 border border-red-200 dark:border-rose-500/30 rounded-lg text-red-700 dark:text-rose-300 text-xs sm:text-sm">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
@@ -67,7 +67,7 @@ export const Step3BusinessInfo = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="business-category-select"
-            className="text-sm font-semibold text-[#0f1b2d] flex items-center gap-1"
+            className="text-sm font-semibold text-[#0f1b2d] dark:text-slate-200 flex items-center gap-1"
           >
             <span>Business Category</span>
             <span className="text-[#ef4444]">*</span>
@@ -78,13 +78,13 @@ export const Step3BusinessInfo = ({
               required
               value={data.businessCategory || ''}
               onChange={(e) => onChange({ ...data, businessCategory: e.target.value })}
-              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] bg-white text-[15px] text-[#0f172a] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer"
+              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all appearance-none cursor-pointer"
             >
-              <option value="" disabled className="text-[#9ca3af]">
+              <option value="" disabled className="text-[#9ca3af] dark:text-slate-500">
                 Select a category
               </option>
               {CATEGORIES.map((cat) => (
-                <option key={cat} value={cat}>
+                <option key={cat} value={cat} className="dark:bg-[#0c1836] dark:text-white">
                   {cat}
                 </option>
               ))}
@@ -99,9 +99,9 @@ export const Step3BusinessInfo = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="business-description-input"
-            className="text-sm font-semibold text-[#0f1b2d]"
+            className="text-sm font-semibold text-[#0f1b2d] dark:text-slate-200"
           >
-            Business Description <span className="text-[#64748b] font-normal text-xs">(optional)</span>
+            Business Description <span className="text-[#64748b] dark:text-slate-400 font-normal text-xs">(optional)</span>
           </label>
           <textarea
             id="business-description-input"
@@ -109,7 +109,7 @@ export const Step3BusinessInfo = ({
             value={data.businessDescription || ''}
             onChange={(e) => onChange({ ...data, businessDescription: e.target.value })}
             placeholder="Describe what your business sells or offers..."
-            className="w-full h-[120px] p-4 rounded-[10px] border border-[#d1d5db] bg-white text-[15px] text-[#0f172a] placeholder-[#9ca3af] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all resize-none leading-normal"
+            className="w-full h-[120px] p-4 rounded-[10px] border border-[#d1d5db] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white placeholder-[#9ca3af] dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all resize-none leading-normal"
           />
         </div>
 
@@ -117,22 +117,22 @@ export const Step3BusinessInfo = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="business-type-select"
-            className="text-sm font-semibold text-[#0f1b2d]"
+            className="text-sm font-semibold text-[#0f1b2d] dark:text-slate-200"
           >
-            Business Type <span className="text-[#64748b] font-normal text-xs">(optional)</span>
+            Business Type <span className="text-[#64748b] dark:text-slate-400 font-normal text-xs">(optional)</span>
           </label>
           <div className="relative">
             <select
               id="business-type-select"
               value={data.businessType || ''}
               onChange={(e) => onChange({ ...data, businessType: e.target.value })}
-              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] bg-white text-[15px] text-[#0f172a] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer"
+              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all appearance-none cursor-pointer"
             >
-              <option value="" className="text-[#9ca3af]">
+              <option value="" className="text-[#9ca3af] dark:text-slate-500">
                 e.g. Online Store, Retail, Wholesale
               </option>
               {BUSINESS_TYPES.map((bt) => (
-                <option key={bt} value={bt}>
+                <option key={bt} value={bt} className="dark:bg-[#0c1836] dark:text-white">
                   {bt}
                 </option>
               ))}
@@ -147,9 +147,9 @@ export const Step3BusinessInfo = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="target-audience-input"
-            className="text-sm font-semibold text-[#0f1b2d]"
+            className="text-sm font-semibold text-[#0f1b2d] dark:text-slate-200"
           >
-            Target Audience <span className="text-[#64748b] font-normal text-xs">(optional)</span>
+            Target Audience <span className="text-[#64748b] dark:text-slate-400 font-normal text-xs">(optional)</span>
           </label>
           <input
             id="target-audience-input"
@@ -157,7 +157,7 @@ export const Step3BusinessInfo = ({
             value={data.targetAudience || ''}
             onChange={(e) => onChange({ ...data, targetAudience: e.target.value })}
             placeholder="Describe your main customers"
-            className="w-full h-12 px-4 rounded-[10px] border border-[#d1d5db] bg-white text-[15px] text-[#0f172a] placeholder-[#9ca3af] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all"
+            className="w-full h-12 px-4 rounded-[10px] border border-[#d1d5db] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white placeholder-[#9ca3af] dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all"
           />
         </div>
       </div>
@@ -167,7 +167,7 @@ export const Step3BusinessInfo = ({
         <button
           type="button"
           onClick={onBack}
-          className="h-12 px-6 rounded-lg border border-[#e2e8f0] hover:bg-slate-50 text-[#475569] font-semibold text-sm sm:text-base transition-colors cursor-pointer"
+          className="h-12 px-6 rounded-lg border border-[#e2e8f0] dark:border-[#1e3a75] hover:bg-slate-50 dark:hover:bg-[#122244] text-[#475569] dark:text-slate-300 font-semibold text-sm sm:text-base transition-colors cursor-pointer"
         >
           Back
         </button>

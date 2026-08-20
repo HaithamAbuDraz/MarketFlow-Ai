@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Bell, Moon, Sun, ChevronDown, Menu, LogOut, Settings, CreditCard } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { useTheme } from '@/context/ThemeContext';
 
 export const DashboardHeader = ({
   storeName,
@@ -9,8 +10,8 @@ export const DashboardHeader = ({
   onOpenNotifications,
 }) => {
   const { user, logout } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const displayName = storeName || user?.store_name || user?.name || 'My Store';
@@ -33,21 +34,21 @@ export const DashboardHeader = ({
 
   return (
     <header
-      className="h-[72px] bg-white border-b border-[#e2e8f0] px-4 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-30 select-none"
+      className="h-[72px] bg-white dark:bg-[#070e20] border-b border-[#e2e8f0] dark:border-[#142347] px-4 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-30 select-none transition-colors duration-200"
       data-node-id="278:89"
     >
       {/* Left: Mobile Hamburger & Page Title */}
       <div className="flex items-center gap-3">
         <button
           onClick={onToggleSidebar}
-          className="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
+          className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           aria-label="Open sidebar"
         >
           <Menu size={20} />
         </button>
 
         <h1
-          className="text-xl sm:text-2xl font-bold text-[#0f172a] tracking-tight"
+          className="text-xl sm:text-2xl font-bold text-[#0f172a] dark:text-white tracking-tight"
           data-node-id="278:90"
         >
           Dashboard
@@ -60,74 +61,79 @@ export const DashboardHeader = ({
         <div className="relative hidden md:block w-[240px] lg:w-[280px]">
           <Search
             size={16}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400 pointer-events-none"
           />
           <input
             type="text"
             placeholder="Search anything..."
-            className="w-full h-[40px] pl-9 pr-4 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            className="w-full h-[40px] pl-9 pr-4 text-xs sm:text-sm bg-slate-50 dark:bg-[#0b1633] border border-slate-200 dark:border-[#1e3a75] rounded-lg text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
           />
         </div>
 
         {/* Action Controls Group (Node 719:9146) */}
         <div className="flex items-center gap-2">
-          {/* Theme Toggle */}
+          {/* Theme Toggle (Node 718:4569) */}
           <button
             type="button"
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
-            title="Toggle theme"
+            onClick={toggleTheme}
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg border border-slate-200 dark:border-[#1e3a75] bg-white dark:bg-[#0b1633] flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#122244] active:scale-95 transition-all cursor-pointer shadow-xs"
+            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           >
-            {isDarkMode ? <Sun size={17} className="text-amber-500" /> : <Moon size={17} className="text-slate-600" />}
+            {isDark ? (
+              <Sun size={18} className="text-amber-400 transition-transform duration-300 rotate-0 hover:rotate-45" />
+            ) : (
+              <Moon size={18} className="text-slate-600 transition-transform duration-300 rotate-0 hover:-rotate-12" />
+            )}
           </button>
 
           {/* Notifications Bell */}
           <button
             type="button"
             onClick={onOpenNotifications}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 relative transition-colors cursor-pointer"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg border border-slate-200 dark:border-[#1e3a75] bg-white dark:bg-[#0b1633] flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#122244] relative transition-colors cursor-pointer shadow-xs"
             title="Notifications"
           >
             <Bell size={18} />
-            <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white" />
+            <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white dark:ring-[#070e20]" />
           </button>
 
-          <div className="hidden sm:block h-6 w-px bg-slate-200 mx-1" />
+          <div className="hidden sm:block h-6 w-px bg-slate-200 dark:bg-[#142347] mx-1" />
 
           {/* User / Store Profile Dropdown Button */}
           <div className="relative">
             <button
               type="button"
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-              className="flex items-center gap-2.5 p-1 sm:px-2.5 sm:py-1.5 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-all cursor-pointer"
+              className="flex items-center gap-2.5 p-1 sm:px-2.5 sm:py-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-[#0b1633] border border-transparent hover:border-slate-200 dark:hover:border-[#1e3a75] transition-all cursor-pointer"
             >
               <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#6366f1] to-[#a855f7] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
                 {initials}
               </div>
               <div className="hidden sm:block text-left">
-                <div className="text-xs font-bold text-[#0f172a] leading-tight truncate max-w-[120px]">
+                <div className="text-xs font-bold text-[#0f172a] dark:text-white leading-tight truncate max-w-[120px]">
                   {displayName}
                 </div>
-                <div className="text-[10px] text-slate-500 leading-tight">
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
                   {user?.role === 'admin' ? 'Administrator' : 'Store Owner'}
                 </div>
               </div>
-              <ChevronDown size={14} className="hidden sm:block text-slate-400" />
+              <ChevronDown size={14} className="hidden sm:block text-slate-400 dark:text-slate-400" />
             </button>
 
             {/* User Dropdown Menu */}
             {isUserMenuOpen && (
-              <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-slate-100 py-1.5 z-50 animate-modal-in text-xs font-medium text-slate-700">
-                <div className="px-3.5 py-2.5 border-b border-slate-100">
-                  <div className="font-semibold text-[#0f172a] truncate">{displayName}</div>
+              <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-[#091530] rounded-xl shadow-lg border border-slate-100 dark:border-[#1e3a75] py-1.5 z-50 animate-modal-in text-xs font-medium text-slate-700 dark:text-slate-200">
+                <div className="px-3.5 py-2.5 border-b border-slate-100 dark:border-[#142347]">
+                  <div className="font-semibold text-[#0f172a] dark:text-white truncate">{displayName}</div>
                   {displayEmail && (
-                    <div className="text-[11px] text-slate-400 truncate mt-0.5">{displayEmail}</div>
+                    <div className="text-[11px] text-slate-400 dark:text-slate-400 truncate mt-0.5">{displayEmail}</div>
                   )}
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsUserMenuOpen(false)}
-                  className="w-full flex items-center gap-2 px-3.5 py-2 hover:bg-slate-50 transition-colors cursor-pointer text-left"
+                  className="w-full flex items-center gap-2 px-3.5 py-2 hover:bg-slate-50 dark:hover:bg-[#122244] transition-colors cursor-pointer text-left"
                 >
                   <Settings size={14} className="text-slate-400" />
                   <span>Store Settings</span>
@@ -135,16 +141,16 @@ export const DashboardHeader = ({
                 <button
                   type="button"
                   onClick={() => setIsUserMenuOpen(false)}
-                  className="w-full flex items-center gap-2 px-3.5 py-2 hover:bg-slate-50 transition-colors cursor-pointer text-left"
+                  className="w-full flex items-center gap-2 px-3.5 py-2 hover:bg-slate-50 dark:hover:bg-[#122244] transition-colors cursor-pointer text-left"
                 >
                   <CreditCard size={14} className="text-slate-400" />
                   <span>Billing & Plans</span>
                 </button>
-                <div className="border-t border-slate-100 my-1" />
+                <div className="border-t border-slate-100 dark:border-[#142347] my-1" />
                 <button
                   type="button"
                   onClick={handleSignOut}
-                  className="w-full flex items-center gap-2 px-3.5 py-2 text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left font-semibold"
+                  className="w-full flex items-center gap-2 px-3.5 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors cursor-pointer text-left font-semibold"
                 >
                   <LogOut size={14} />
                   <span>Sign Out</span>
@@ -159,3 +165,4 @@ export const DashboardHeader = ({
 };
 
 export default DashboardHeader;
+

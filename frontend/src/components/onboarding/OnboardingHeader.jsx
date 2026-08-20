@@ -3,11 +3,11 @@ import { Logo } from '@/components/common/Logo';
 
 export const OnboardingHeader = ({ onSaveAndExit }) => {
   return (
-    <header className="w-full h-[72px] bg-white border-b border-[#e4e9f2] px-6 sm:px-10 flex items-center justify-between shrink-0 sticky top-0 z-30">
+    <header className="w-full h-[72px] bg-white dark:bg-[#070e20] border-b border-[#e4e9f2] dark:border-[#142347] px-6 sm:px-10 flex items-center justify-between shrink-0 sticky top-0 z-30 transition-colors duration-200">
       {/* Left: Branding */}
       <div className="flex items-center gap-2.5 sm:gap-3">
         <Logo size={36} showText={false} />
-        <span className="font-['Inter'] font-bold text-lg sm:text-[20px] text-[#0f172a] tracking-tight select-none">
+        <span className="font-['Inter'] font-bold text-lg sm:text-[20px] text-[#0f172a] dark:text-white tracking-tight select-none">
           MarketFlow <span className="text-[#2563eb]">AI</span>
         </span>
       </div>

@@ -145,7 +145,7 @@ export const RegisterPage = () => {
       <HeroBanner />
 
       {/* Right Column: Dynamic Form Container */}
-      <div className="flex-1 lg:flex-[0.95] flex items-center justify-center bg-[#f8f8fb] p-3 sm:p-5 lg:p-6 h-full overflow-y-auto no-scrollbar">
+      <div className="flex-1 lg:flex-[0.95] flex items-center justify-center bg-[#f8f8fb] dark:bg-[#070d1e] p-3 sm:p-5 lg:p-6 h-full overflow-y-auto no-scrollbar transition-colors duration-200">
         {step === 'FORM' && (
           <RegisterForm
             formData={formData}

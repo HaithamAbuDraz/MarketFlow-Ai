@@ -97,20 +97,20 @@ export const Step2StoreSetup = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-[560px] bg-white rounded-[20px] p-6 sm:p-10 drop-shadow-[0px_8px_16px_rgba(15,23,42,0.06)] border border-[#e2e8f0]/80 flex flex-col gap-8 animate-modal-in"
+      className="w-full max-w-[560px] bg-white dark:bg-[#091530] rounded-[20px] p-6 sm:p-10 drop-shadow-[0px_8px_16px_rgba(15,23,42,0.06)] border border-[#e2e8f0]/80 dark:border-[#173066] flex flex-col gap-8 animate-modal-in transition-colors duration-200"
     >
       {/* Form Header */}
       <div className="flex flex-col gap-2">
-        <h2 className="text-2xl sm:text-[28px] font-bold text-[#0f172a] leading-tight">
+        <h2 className="text-2xl sm:text-[28px] font-bold text-[#0f172a] dark:text-white leading-tight">
           Tell us about your store
         </h2>
-        <p className="text-sm sm:text-[16px] text-[#475569] leading-relaxed">
+        <p className="text-sm sm:text-[16px] text-[#475569] dark:text-slate-400 leading-relaxed">
           We just need a few details to get your store set up.
         </p>
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs sm:text-sm">
+        <div className="flex items-center gap-2 p-3 bg-red-50 dark:bg-rose-950/60 border border-red-200 dark:border-rose-500/30 rounded-lg text-red-700 dark:text-rose-300 text-xs sm:text-sm">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
@@ -122,7 +122,7 @@ export const Step2StoreSetup = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="store-name-input"
-            className="text-sm font-medium text-[#0f172a]"
+            className="text-sm font-medium text-[#0f172a] dark:text-slate-200"
           >
             Store Name <span className="text-red-500">*</span>
           </label>
@@ -133,7 +133,7 @@ export const Step2StoreSetup = ({
             value={data.storeName || ''}
             onChange={handleNameChange}
             placeholder="e.g. Apex Apparel, Craft & Co."
-            className="w-full h-12 px-4 rounded-[10px] border border-[#e2e8f0] bg-white text-[15px] text-[#0f172a] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all"
+            className="w-full h-12 px-4 rounded-[10px] border border-[#e2e8f0] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white placeholder-[#94a3b8] dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all"
           />
         </div>
 
@@ -141,20 +141,20 @@ export const Step2StoreSetup = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="store-url-input"
-            className="text-sm font-medium text-[#0f172a]"
+            className="text-sm font-medium text-[#0f172a] dark:text-slate-200"
           >
             Store URL
           </label>
-          <div className="w-full h-12 rounded-[10px] border border-[#e2e8f0] bg-white flex items-center overflow-hidden focus-within:border-[#2563eb] focus-within:ring-2 focus-within:ring-blue-100 transition-all">
+          <div className="w-full h-12 rounded-[10px] border border-[#e2e8f0] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] flex items-center overflow-hidden focus-within:border-[#2563eb] focus-within:ring-2 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30 transition-all">
             <input
               id="store-url-input"
               type="text"
               value={data.storeSlug || ''}
               onChange={handleSlugChange}
               placeholder="myawesomestore"
-              className="flex-1 h-full pl-4 pr-2 bg-transparent text-[15px] text-[#0f172a] placeholder-[#94a3b8] focus:outline-none"
+              className="flex-1 h-full pl-4 pr-2 bg-transparent text-[15px] text-[#0f172a] dark:text-white placeholder-[#94a3b8] dark:placeholder:text-slate-500 focus:outline-none"
             />
-            <div className="h-full px-4 bg-[#f1f5f9] border-l border-[#e2e8f0] text-[#64748b] text-sm font-medium flex items-center select-none shrink-0">
+            <div className="h-full px-4 bg-[#f1f5f9] dark:bg-[#132347] border-l border-[#e2e8f0] dark:border-[#1e3a75] text-[#64748b] dark:text-slate-300 text-sm font-medium flex items-center select-none shrink-0">
               .marketflow.ai
             </div>
           </div>
@@ -162,8 +162,8 @@ export const Step2StoreSetup = ({
 
         {/* Field: Store Logo (optional) */}
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-medium text-[#0f172a]">
-            Store Logo <span className="text-[#64748b] font-normal text-xs">(optional)</span>
+          <label className="text-sm font-medium text-[#0f172a] dark:text-slate-200">
+            Store Logo <span className="text-[#64748b] dark:text-slate-400 font-normal text-xs">(optional)</span>
           </label>
 
           <input
@@ -181,10 +181,10 @@ export const Step2StoreSetup = ({
               e.preventDefault();
               handleLogoUpload(e.dataTransfer.files[0]);
             }}
-            className="w-full min-h-[96px] p-4 rounded-[10px] border border-dashed border-[#e2e8f0] hover:border-[#2563eb] bg-white hover:bg-blue-50/30 flex items-center gap-4 transition-all duration-150 cursor-pointer group"
+            className="w-full min-h-[96px] p-4 rounded-[10px] border border-dashed border-[#e2e8f0] dark:border-[#1e3a75] hover:border-[#2563eb] dark:hover:border-blue-400 bg-white dark:bg-[#0c1836] hover:bg-blue-50/30 dark:hover:bg-[#12244a]/50 flex items-center gap-4 transition-all duration-150 cursor-pointer group"
           >
             {data.storeLogo ? (
-              <div className="relative w-16 h-16 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden shrink-0 group/img">
+              <div className="relative w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden shrink-0 group/img">
                 <img
                   src={data.storeLogo}
                   alt="Store Logo Preview"
@@ -200,16 +200,16 @@ export const Step2StoreSetup = ({
                 </button>
               </div>
             ) : (
-              <div className="w-16 h-16 rounded-lg bg-[rgba(37,99,235,0.08)] group-hover:bg-[rgba(37,99,235,0.15)] flex items-center justify-center shrink-0 transition-colors">
+              <div className="w-16 h-16 rounded-lg bg-[rgba(37,99,235,0.08)] dark:bg-blue-900/30 group-hover:bg-[rgba(37,99,235,0.15)] flex items-center justify-center shrink-0 transition-colors">
                 <img src={uploadIconSvg} alt="Upload Logo" className="w-6 h-6 object-contain" />
               </div>
             )}
 
             <div className="flex-1 flex flex-col gap-0.5">
-              <span className="text-sm font-medium text-[#2563eb] group-hover:underline">
+              <span className="text-sm font-medium text-[#2563eb] dark:text-[#38bdf8] group-hover:underline">
                 {data.storeLogo ? 'Change store logo' : 'Upload store logo'}
               </span>
-              <span className="text-xs text-[#64748b]">
+              <span className="text-xs text-[#64748b] dark:text-slate-400">
                 Supports PNG, JPG, or WEBP up to 2MB. Recommended 512×512px.
               </span>
             </div>
@@ -218,7 +218,7 @@ export const Step2StoreSetup = ({
 
         {/* Field: Store Theme */}
         <div className="flex flex-col gap-2.5 pt-1">
-          <label className="text-sm font-medium text-[#0f172a]">
+          <label className="text-sm font-medium text-[#0f172a] dark:text-slate-200">
             Store Theme
           </label>
 
@@ -233,11 +233,11 @@ export const Step2StoreSetup = ({
                   className={`relative rounded-[10px] overflow-hidden border cursor-pointer transition-all duration-200 flex flex-col ${
                     isSelected
                       ? 'border-2 border-[#2563eb] shadow-[0px_4px_12px_rgba(37,99,235,0.15)] scale-[1.02]'
-                      : 'border-[#e2e8f0] bg-white hover:border-slate-300'
+                      : 'border-[#e2e8f0] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] hover:border-slate-300 dark:hover:border-blue-400'
                   }`}
                 >
                   {/* Theme Thumbnail */}
-                  <div className="h-20 w-full relative bg-slate-100 overflow-hidden">
+                  <div className="h-20 w-full relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
                     <img
                       src={th.img}
                       alt={th.name}
@@ -256,13 +256,13 @@ export const Step2StoreSetup = ({
                   <div
                     className={`p-2.5 sm:p-3 text-center sm:text-left transition-colors ${
                       isSelected
-                        ? 'bg-[rgba(37,99,235,0.06)]'
-                        : 'bg-white'
+                        ? 'bg-[rgba(37,99,235,0.06)] dark:bg-blue-900/30'
+                        : 'bg-white dark:bg-[#0c1836]'
                     }`}
                   >
                     <p
                       className={`text-xs sm:text-[13px] font-semibold ${
-                        isSelected ? 'text-[#2563eb]' : 'text-[#0f172a]'
+                        isSelected ? 'text-[#2563eb] dark:text-[#38bdf8]' : 'text-[#0f172a] dark:text-slate-200'
                       }`}
                     >
                       {th.name}
@@ -280,7 +280,7 @@ export const Step2StoreSetup = ({
         <button
           type="button"
           onClick={onBack}
-          className="h-12 px-6 rounded-lg border border-[#e2e8f0] hover:bg-slate-50 text-[#475569] font-semibold text-sm sm:text-base transition-colors cursor-pointer"
+          className="h-12 px-6 rounded-lg border border-[#e2e8f0] dark:border-[#1e3a75] hover:bg-slate-50 dark:hover:bg-[#122244] text-[#475569] dark:text-slate-300 font-semibold text-sm sm:text-base transition-colors cursor-pointer"
         >
           Back
         </button>

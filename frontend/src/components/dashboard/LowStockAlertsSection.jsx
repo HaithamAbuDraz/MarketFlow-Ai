@@ -54,18 +54,18 @@ export const LowStockAlertsSection = ({ onManageInventory, isLoading = false }) 
 
   return (
     <div
-      className="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between h-full"
+      className="bg-white dark:bg-[#091530] rounded-xl border border-slate-200/80 dark:border-[#173066] p-5 shadow-xs flex flex-col justify-between h-full transition-colors duration-200"
       data-node-id="719:8974"
     >
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-        <h3 className="font-bold text-sm sm:text-base text-[#0f172a] tracking-tight">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-[#14264e]">
+        <h3 className="font-bold text-sm sm:text-base text-[#0f172a] dark:text-white tracking-tight">
           Low Stock Alerts
         </h3>
         {isLoading ? (
-          <div className="w-14 h-5 bg-slate-200 rounded-full animate-pulse" />
+          <div className="w-14 h-5 bg-slate-200 dark:bg-[#142347] rounded-full animate-pulse" />
         ) : (
-          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-200/80">
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-300 border border-rose-200/80 dark:border-rose-500/30">
             3 items
           </span>
         )}
@@ -79,13 +79,13 @@ export const LowStockAlertsSection = ({ onManageInventory, isLoading = false }) 
             <div key={i} className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-slate-200 rounded-full" />
-                  <div className="h-3 bg-slate-200 rounded-md w-32" />
+                  <div className="w-4 h-4 bg-slate-200 dark:bg-[#142347] rounded-full" />
+                  <div className="h-3 bg-slate-200 dark:bg-[#142347] rounded-md w-32" />
                 </div>
-                <div className="h-3 bg-slate-200 rounded-md w-8" />
+                <div className="h-3 bg-slate-200 dark:bg-[#142347] rounded-md w-8" />
               </div>
-              <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                <div className="h-full bg-slate-200 rounded-full w-1/3" />
+              <div className="w-full h-1.5 bg-slate-100 dark:bg-[#142347] rounded-full overflow-hidden">
+                <div className="h-full bg-slate-200 dark:bg-[#1e3a75] rounded-full w-1/3" />
               </div>
             </div>
           ))}
@@ -98,13 +98,13 @@ export const LowStockAlertsSection = ({ onManageInventory, isLoading = false }) 
               <div className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-1.5 min-w-0 pr-2">
                   <span className="text-xs shrink-0 select-none">{item.icon}</span>
-                  <span className="font-semibold text-[#0f172a] truncate text-xs">
+                  <span className="font-semibold text-[#0f172a] dark:text-white truncate text-xs">
                     {item.name}
                   </span>
                 </div>
                 <span
                   className={`text-[11px] font-bold shrink-0 ${
-                    item.isCritical ? 'text-rose-600' : 'text-amber-600'
+                    item.isCritical ? 'text-rose-600 dark:text-rose-400' : 'text-amber-600 dark:text-amber-400'
                   }`}
                 >
                   {item.left}
@@ -112,7 +112,7 @@ export const LowStockAlertsSection = ({ onManageInventory, isLoading = false }) 
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-slate-100 dark:bg-[#142347] rounded-full overflow-hidden">
                 <div
                   className={`h-full rounded-full transition-all duration-300 ${
                     item.isCritical ? 'bg-rose-500' : 'bg-amber-400'
@@ -129,7 +129,7 @@ export const LowStockAlertsSection = ({ onManageInventory, isLoading = false }) 
       <button
         type="button"
         onClick={onManageInventory}
-        className="w-full h-8.5 mt-2 bg-white hover:bg-slate-50 active:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs"
+        className="w-full h-8.5 mt-2 bg-white dark:bg-[#0b1633] hover:bg-slate-50 dark:hover:bg-[#122244] active:bg-slate-100 dark:active:bg-[#152a55] border border-slate-200 dark:border-[#1e3a75] text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs"
       >
         <span>Manage Inventory</span>
         <span className="text-xs">→</span>

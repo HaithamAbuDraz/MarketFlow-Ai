@@ -54,20 +54,20 @@ export const Step4Preferences = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-[560px] bg-white rounded-[20px] p-6 sm:p-10 drop-shadow-[0px_8px_16px_rgba(15,23,42,0.06)] border border-[#e2e8f0]/80 flex flex-col gap-8 animate-modal-in"
+      className="w-full max-w-[560px] bg-white dark:bg-[#091530] rounded-[20px] p-6 sm:p-10 drop-shadow-[0px_8px_16px_rgba(15,23,42,0.06)] border border-[#e2e8f0]/80 dark:border-[#173066] flex flex-col gap-8 animate-modal-in transition-colors duration-200"
     >
       {/* Form Header */}
       <div className="flex flex-col gap-2">
-        <h2 className="text-2xl sm:text-[28px] font-bold text-[#0f172a] leading-tight">
+        <h2 className="text-2xl sm:text-[28px] font-bold text-[#0f172a] dark:text-white leading-tight">
           Set your store preferences
         </h2>
-        <p className="text-sm sm:text-[16px] text-[#475569] leading-relaxed">
+        <p className="text-sm sm:text-[16px] text-[#475569] dark:text-slate-400 leading-relaxed">
           Choose a few preferences to personalize how your store works.
         </p>
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs sm:text-sm">
+        <div className="flex items-center gap-2 p-3 bg-red-50 dark:bg-rose-950/60 border border-red-200 dark:border-rose-500/30 rounded-lg text-red-700 dark:text-rose-300 text-xs sm:text-sm">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
@@ -79,7 +79,7 @@ export const Step4Preferences = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="store-language-select"
-            className="text-sm font-semibold text-[#0f1b2d]"
+            className="text-sm font-semibold text-[#0f1b2d] dark:text-slate-200"
           >
             Store Language
           </label>
@@ -88,13 +88,13 @@ export const Step4Preferences = ({
               id="store-language-select"
               value={data.language || 'en-US'}
               onChange={(e) => onChange({ ...data, language: e.target.value })}
-              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] bg-white text-[15px] text-[#0f172a] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer"
+              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all appearance-none cursor-pointer"
             >
-              <option value="" disabled className="text-[#9ca3af]">
+              <option value="" disabled className="text-[#9ca3af] dark:text-slate-500">
                 Select language
               </option>
               {LANGUAGES.map((lang) => (
-                <option key={lang.code} value={lang.code}>
+                <option key={lang.code} value={lang.code} className="dark:bg-[#0c1836] dark:text-white">
                   {lang.name}
                 </option>
               ))}
@@ -109,7 +109,7 @@ export const Step4Preferences = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="store-currency-select"
-            className="text-sm font-semibold text-[#0f1b2d]"
+            className="text-sm font-semibold text-[#0f1b2d] dark:text-slate-200"
           >
             Currency
           </label>
@@ -118,13 +118,13 @@ export const Step4Preferences = ({
               id="store-currency-select"
               value={data.currency || 'USD'}
               onChange={(e) => onChange({ ...data, currency: e.target.value })}
-              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] bg-white text-[15px] text-[#0f172a] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer"
+              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all appearance-none cursor-pointer"
             >
-              <option value="" disabled className="text-[#9ca3af]">
+              <option value="" disabled className="text-[#9ca3af] dark:text-slate-500">
                 Select currency
               </option>
               {CURRENCIES.map((c) => (
-                <option key={c.code} value={c.code}>
+                <option key={c.code} value={c.code} className="dark:bg-[#0c1836] dark:text-white">
                   {c.name}
                 </option>
               ))}
@@ -139,7 +139,7 @@ export const Step4Preferences = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="store-timezone-select"
-            className="text-sm font-semibold text-[#0f1b2d]"
+            className="text-sm font-semibold text-[#0f1b2d] dark:text-slate-200"
           >
             Time Zone
           </label>
@@ -148,13 +148,13 @@ export const Step4Preferences = ({
               id="store-timezone-select"
               value={data.timeZone || 'UTC+03:00'}
               onChange={(e) => onChange({ ...data, timeZone: e.target.value })}
-              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] bg-white text-[15px] text-[#0f172a] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer"
+              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all appearance-none cursor-pointer"
             >
-              <option value="" disabled className="text-[#9ca3af]">
+              <option value="" disabled className="text-[#9ca3af] dark:text-slate-500">
                 Select time zone
               </option>
               {TIMEZONES.map((tz) => (
-                <option key={tz.value} value={tz.value}>
+                <option key={tz.value} value={tz.value} className="dark:bg-[#0c1836] dark:text-white">
                   {tz.name}
                 </option>
               ))}
@@ -169,7 +169,7 @@ export const Step4Preferences = ({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="store-units-select"
-            className="text-sm font-semibold text-[#0f1b2d]"
+            className="text-sm font-semibold text-[#0f1b2d] dark:text-slate-200"
           >
             Unit System &amp; Date Format
           </label>
@@ -178,10 +178,10 @@ export const Step4Preferences = ({
               id="store-units-select"
               value={data.unitSystem || 'metric-dmy'}
               onChange={(e) => onChange({ ...data, unitSystem: e.target.value })}
-              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] bg-white text-[15px] text-[#0f172a] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer"
+              className="w-full h-12 px-4 pr-10 rounded-[10px] border border-[#d1d5db] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] text-[15px] text-[#0f172a] dark:text-white focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all appearance-none cursor-pointer"
             >
               {MEASUREMENT_SYSTEMS.map((u) => (
-                <option key={u.value} value={u.value}>
+                <option key={u.value} value={u.value} className="dark:bg-[#0c1836] dark:text-white">
                   {u.name}
                 </option>
               ))}
@@ -199,7 +199,7 @@ export const Step4Preferences = ({
           type="button"
           onClick={onBack}
           disabled={isLoading}
-          className="h-12 px-6 rounded-lg border border-[#e2e8f0] hover:bg-slate-50 disabled:opacity-50 text-[#475569] font-semibold text-sm sm:text-base transition-colors cursor-pointer"
+          className="h-12 px-6 rounded-lg border border-[#e2e8f0] dark:border-[#1e3a75] hover:bg-slate-50 dark:hover:bg-[#122244] disabled:opacity-50 text-[#475569] dark:text-slate-300 font-semibold text-sm sm:text-base transition-colors cursor-pointer"
         >
           Back
         </button>

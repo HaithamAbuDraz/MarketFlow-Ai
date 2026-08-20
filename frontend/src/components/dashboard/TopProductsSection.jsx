@@ -68,16 +68,16 @@ export const TopProductsSection = ({
 
   return (
     <div
-      className="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between h-full"
+      className="bg-white dark:bg-[#091530] rounded-xl border border-slate-200/80 dark:border-[#173066] p-5 shadow-xs flex flex-col justify-between h-full transition-colors duration-200"
       data-node-id="719:8867"
     >
       {/* Header */}
-      <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
+      <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 dark:border-[#14264e]">
         <div>
-          <h3 className="font-bold text-base text-[#0f172a] tracking-tight">
+          <h3 className="font-bold text-base text-[#0f172a] dark:text-white tracking-tight">
             Top Products
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Best-performing products this month
           </p>
         </div>
@@ -85,7 +85,7 @@ export const TopProductsSection = ({
         <button
           type="button"
           onClick={onViewAll}
-          className="px-3 py-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 rounded-md transition-colors cursor-pointer"
+          className="px-3 py-1 bg-slate-50 dark:bg-[#0b1633] hover:bg-slate-100 dark:hover:bg-[#122244] border border-slate-200 dark:border-[#1e3a75] text-xs font-semibold text-slate-700 dark:text-slate-200 rounded-md transition-colors cursor-pointer"
         >
           View All
         </button>
@@ -95,7 +95,7 @@ export const TopProductsSection = ({
       <div className="overflow-x-auto my-1.5">
         <table className="w-full text-left border-collapse min-w-[520px]">
           <thead>
-            <tr className="text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+            <tr className="text-[11px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-[#14264e]">
               <th className="py-2.5 pl-2 w-8">#</th>
               <th className="py-2.5">Product</th>
               <th className="py-2.5 text-right w-20">Units</th>
@@ -107,27 +107,27 @@ export const TopProductsSection = ({
             {isLoading ? (
               /* Skeleton Loading Rows */
               [1, 2, 3, 4, 5].map((i) => (
-                <tr key={i} className="border-b border-slate-50 animate-pulse">
+                <tr key={i} className="border-b border-slate-50 dark:border-[#14264e]/50 animate-pulse">
                   <td className="py-2.5 pl-2">
-                    <div className="w-4 h-4 rounded bg-slate-200" />
+                    <div className="w-4 h-4 rounded bg-slate-200 dark:bg-[#142347]" />
                   </td>
                   <td className="py-2.5">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-slate-200 shrink-0" />
+                      <div className="w-8 h-8 rounded-lg bg-slate-200 dark:bg-[#142347] shrink-0" />
                       <div className="space-y-1.5">
-                        <div className="h-3 bg-slate-200 rounded-md w-36" />
-                        <div className="h-2 bg-slate-100 rounded-md w-16" />
+                        <div className="h-3 bg-slate-200 dark:bg-[#142347] rounded-md w-36" />
+                        <div className="h-2 bg-slate-100 dark:bg-[#0e1d3e] rounded-md w-16" />
                       </div>
                     </div>
                   </td>
                   <td className="py-2.5 text-right">
-                    <div className="h-3 bg-slate-200 rounded-md w-12 ml-auto" />
+                    <div className="h-3 bg-slate-200 dark:bg-[#142347] rounded-md w-12 ml-auto" />
                   </td>
                   <td className="py-2.5 text-right">
-                    <div className="h-3 bg-slate-200 rounded-md w-16 ml-auto" />
+                    <div className="h-3 bg-slate-200 dark:bg-[#142347] rounded-md w-16 ml-auto" />
                   </td>
                   <td className="py-2.5 text-right pr-2">
-                    <div className="h-3 bg-slate-200 rounded-md w-10 ml-auto" />
+                    <div className="h-3 bg-slate-200 dark:bg-[#142347] rounded-md w-10 ml-auto" />
                   </td>
                 </tr>
               ))
@@ -136,36 +136,36 @@ export const TopProductsSection = ({
               displayList.map((p) => (
                 <tr
                   key={p.id}
-                  className="border-b border-slate-50 hover:bg-slate-50/70 transition-colors text-xs"
+                  className="border-b border-slate-50 dark:border-[#14264e]/50 hover:bg-slate-50/70 dark:hover:bg-[#112248]/50 transition-colors text-xs"
                 >
-                  <td className="py-2.5 pl-2 font-medium text-slate-400">
+                  <td className="py-2.5 pl-2 font-medium text-slate-400 dark:text-slate-400">
                     {p.rank}
                   </td>
                   <td className="py-2.5">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-sm shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-[#112248] dark:border dark:border-[#1e3a75]/40 flex items-center justify-center text-sm shrink-0">
                         {p.icon}
                       </div>
                       <div>
-                        <div className="font-semibold text-[#0f172a] leading-tight">
+                        <div className="font-semibold text-[#0f172a] dark:text-white leading-tight">
                           {p.name}
                         </div>
-                        <div className="text-[10px] text-slate-400 mt-0.5">
+                        <div className="text-[10px] text-slate-400 dark:text-slate-400 mt-0.5">
                           {p.sku}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-2.5 text-right font-medium text-slate-600">
+                  <td className="py-2.5 text-right font-medium text-slate-600 dark:text-slate-300">
                     {p.units}
                   </td>
-                  <td className="py-2.5 text-right font-bold text-[#0f172a]">
+                  <td className="py-2.5 text-right font-bold text-[#0f172a] dark:text-white">
                     {p.revenue}
                   </td>
                   <td className="py-2.5 text-right pr-2">
                     <span
                       className={`font-semibold ${
-                        p.isPositive ? 'text-emerald-600' : 'text-rose-500'
+                        p.isPositive ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500 dark:text-rose-400'
                       }`}
                     >
                       {p.trend}

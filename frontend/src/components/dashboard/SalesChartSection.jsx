@@ -24,22 +24,22 @@ export const SalesChartSection = ({ isLoading = false }) => {
 
   return (
     <div
-      className="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between h-full"
+      className="bg-white dark:bg-[#091530] rounded-xl border border-slate-200/80 dark:border-[#173066] p-5 shadow-xs flex flex-col justify-between h-full transition-colors duration-200"
       data-node-id="719:8775"
     >
       {/* Header with Title and Period Filter Tabs */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-[#14264e]">
         <div>
-          <h3 className="font-bold text-base text-[#0f172a] tracking-tight">
+          <h3 className="font-bold text-base text-[#0f172a] dark:text-white tracking-tight">
             Sales Chart
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Revenue performance by period
           </p>
         </div>
 
         {/* Period Selector Pills */}
-        <div className="flex items-center gap-1 bg-slate-100/80 p-1 rounded-lg self-start sm:self-auto">
+        <div className="flex items-center gap-1 bg-slate-100/80 dark:bg-[#060b18] border border-transparent dark:border-[#1e3a75]/50 p-1 rounded-lg self-start sm:self-auto">
           {['7 Days', '30 Days', '90 Days'].map((item) => (
             <button
               key={item}
@@ -47,8 +47,8 @@ export const SalesChartSection = ({ isLoading = false }) => {
               onClick={() => setPeriod(item)}
               className={`px-3 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                 period === item
-                  ? 'bg-white text-blue-600 shadow-xs'
-                  : 'text-slate-500 hover:text-slate-800'
+                  ? 'bg-white dark:bg-[#2563eb] text-blue-600 dark:text-white shadow-xs'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white'
               }`}
             >
               {item}
@@ -62,24 +62,24 @@ export const SalesChartSection = ({ isLoading = false }) => {
         <div className="py-8 flex flex-col items-center justify-center text-center animate-pulse">
           {/* Skeleton Bar Histogram Graphic */}
           <div className="flex items-end justify-center gap-2.5 h-24 mb-4 px-6">
-            <div className="w-4 h-6 bg-slate-100 rounded-t-sm" />
-            <div className="w-4 h-12 bg-slate-200 rounded-t-sm" />
-            <div className="w-4 h-8 bg-slate-100 rounded-t-sm" />
-            <div className="w-4 h-16 bg-slate-200 rounded-t-sm" />
-            <div className="w-4 h-14 bg-slate-100 rounded-t-sm" />
-            <div className="w-4 h-20 bg-slate-300 rounded-t-sm" />
-            <div className="w-4 h-14 bg-slate-200 rounded-t-sm" />
+            <div className="w-4 h-6 bg-slate-100 dark:bg-[#0e1d3e] rounded-t-sm" />
+            <div className="w-4 h-12 bg-slate-200 dark:bg-[#142347] rounded-t-sm" />
+            <div className="w-4 h-8 bg-slate-100 dark:bg-[#0e1d3e] rounded-t-sm" />
+            <div className="w-4 h-16 bg-slate-200 dark:bg-[#142347] rounded-t-sm" />
+            <div className="w-4 h-14 bg-slate-100 dark:bg-[#0e1d3e] rounded-t-sm" />
+            <div className="w-4 h-20 bg-slate-300 dark:bg-[#193261] rounded-t-sm" />
+            <div className="w-4 h-14 bg-slate-200 dark:bg-[#142347] rounded-t-sm" />
           </div>
 
-          <div className="h-4 bg-slate-200 rounded-md w-36 mb-2" />
-          <div className="h-3 bg-slate-100 rounded-md w-48" />
+          <div className="h-4 bg-slate-200 dark:bg-[#142347] rounded-md w-36 mb-2" />
+          <div className="h-3 bg-slate-100 dark:bg-[#0e1d3e] rounded-md w-48" />
         </div>
       ) : (
         /* Populated Interactive Spline Chart */
         <div className="pt-4 pb-2 relative">
           <div className="flex w-full">
             {/* Y-Axis Labels */}
-            <div className="flex flex-col justify-between pr-3 text-[11px] font-medium text-slate-400 select-none pb-7">
+            <div className="flex flex-col justify-between pr-3 text-[11px] font-medium text-slate-400 dark:text-slate-400 select-none pb-7">
               {yLabels.map((lbl) => (
                 <span key={lbl} className="h-4 leading-none">
                   {lbl}
@@ -109,7 +109,7 @@ export const SalesChartSection = ({ isLoading = false }) => {
                     y1={y}
                     x2="660"
                     y2={y}
-                    stroke="#f1f5f9"
+                    className="stroke-[#f1f5f9] dark:stroke-[#14264e]"
                     strokeWidth="1"
                   />
                 ))}
@@ -135,8 +135,8 @@ export const SalesChartSection = ({ isLoading = false }) => {
                       r="4"
                       className={`transition-all duration-150 cursor-pointer ${
                         hoveredPoint?.label === pt.label
-                          ? 'fill-[#2563eb] stroke-white stroke-[3] r-[6]'
-                          : 'fill-white stroke-[#2563eb] stroke-[2]'
+                          ? 'fill-[#2563eb] stroke-white dark:stroke-[#091530] stroke-[3] r-[6]'
+                          : 'fill-white dark:fill-[#091530] stroke-[#2563eb] stroke-[2]'
                       }`}
                       onMouseEnter={() => setHoveredPoint(pt)}
                       onMouseLeave={() => setHoveredPoint(null)}
@@ -148,7 +148,7 @@ export const SalesChartSection = ({ isLoading = false }) => {
               {/* Tooltip Overlay */}
               {hoveredPoint && (
                 <div
-                  className="absolute z-20 pointer-events-none -translate-x-1/2 -translate-y-full mb-2 bg-[#0f172a] text-white text-[11px] font-semibold py-1 px-2.5 rounded-md shadow-lg border border-slate-700 transition-all duration-75"
+                  className="absolute z-20 pointer-events-none -translate-x-1/2 -translate-y-full mb-2 bg-[#0f172a] dark:bg-[#060c1d] text-white text-[11px] font-semibold py-1 px-2.5 rounded-md shadow-lg border border-slate-700 dark:border-[#1e3a75] transition-all duration-75"
                   style={{
                     left: `${(hoveredPoint.x / 670) * 100}%`,
                     top: `${(hoveredPoint.y / 240) * 220 - 8}px`,
@@ -160,7 +160,7 @@ export const SalesChartSection = ({ isLoading = false }) => {
               )}
 
               {/* X-Axis Labels */}
-              <div className="flex justify-between text-[11px] font-medium text-slate-400 mt-1 select-none px-1">
+              <div className="flex justify-between text-[11px] font-medium text-slate-400 dark:text-slate-400 mt-1 select-none px-1">
                 {chartData.map((pt) => (
                   <span key={pt.label}>{pt.label}</span>
                 ))}

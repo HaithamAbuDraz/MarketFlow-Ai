@@ -9,7 +9,7 @@ import { ProtectedRoute } from '@/components/common';
 
 export const App = () => {
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-[#050a18]">
+    <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 dark:bg-[#050a18] text-slate-900 dark:text-slate-100 transition-colors duration-200">
       <Routes>
         {/* Default route redirects to Login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
