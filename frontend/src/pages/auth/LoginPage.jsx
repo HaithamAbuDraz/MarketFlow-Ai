@@ -14,7 +14,7 @@ export const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    rememberMe: true,
+    rememberMe: false,
   });
 
   const [error, setError] = useState('');
@@ -149,9 +149,11 @@ export const LoginPage = () => {
 
             {/* Remember Me & Forgot Password (Node 404:352) */}
             <div className="flex items-center justify-between text-sm pt-0.5">
-              <label className="flex items-center gap-2 cursor-pointer text-[#777c80] dark:text-slate-400 select-none group">
+              <label
+                onClick={() => setFormData((prev) => ({ ...prev, rememberMe: !prev.rememberMe }))}
+                className="flex items-center gap-2 cursor-pointer text-[#777c80] dark:text-slate-400 select-none group"
+              >
                 <div
-                  onClick={() => setFormData({ ...formData, rememberMe: !formData.rememberMe })}
                   className={`w-4.5 h-4.5 rounded-[4px] border flex items-center justify-center transition-colors cursor-pointer ${
                     formData.rememberMe
                       ? 'bg-[#2563eb] border-[#2563eb] text-white'
