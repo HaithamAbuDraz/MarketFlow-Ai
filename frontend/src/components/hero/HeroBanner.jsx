@@ -551,32 +551,32 @@ const AtmosphericBackground = () => (
 export const HeroBanner = () => {
   return (
     <div
-      className="hidden lg:flex relative flex-col justify-between flex-1 lg:flex-[1.08] h-full min-h-full overflow-hidden bg-[#060c1c] p-6 lg:p-10 xl:p-12 select-none"
+      className="hidden lg:flex relative flex-col justify-between flex-1 lg:flex-[1.08] h-full max-h-screen overflow-hidden bg-[#060c1c] p-3 sm:p-4 lg:p-4.5 xl:p-5 2xl:p-7 select-none"
       data-node-id="94:126"
     >
       {/* Background Lighting and Atmospheric Effects */}
       <AtmosphericBackground />
 
       {/* Main Container Content */}
-      <div className="relative z-10 flex flex-col justify-between h-full max-w-[620px] mx-auto w-full">
+      <div className="relative z-10 flex flex-col justify-between h-full max-w-[580px] mx-auto w-full">
         {/* Top Header & Branding (Node 94:164) */}
-        <div className="flex flex-col gap-5 pt-2" data-node-id="94:164">
+        <div className="flex flex-col gap-2 pt-0.5 shrink-0" data-node-id="94:164">
           {/* Logo Mark + Wordmark (Node 94:138) */}
-          <div className="flex items-center gap-3 w-fit" data-node-id="94:138">
-            <LogoMarkIcon className="w-10 sm:w-11 h-auto" />
-            <div className="flex items-center text-[21px] sm:text-[23px] font-extrabold tracking-tight">
+          <div className="flex items-center gap-2 w-fit" data-node-id="94:138">
+            <LogoMarkIcon className="w-8 sm:w-8.5 h-auto" />
+            <div className="flex items-center text-[18px] sm:text-[19.5px] font-extrabold tracking-tight">
               <span className="text-white">MarketFlow</span>
               <span className="text-[#0ea2f2] ml-1.5">AI</span>
             </div>
           </div>
 
           {/* Headline and Subtitle (Node 94:157) */}
-          <div className="flex flex-col gap-2.5">
-            <h1 className="font-['Inter'] font-semibold text-3xl sm:text-4xl lg:text-[44px] text-white leading-[1.18] tracking-tight">
+          <div className="flex flex-col gap-1">
+            <h1 className="font-['Inter'] font-semibold text-xl sm:text-2xl lg:text-[24px] xl:text-[27px] text-white leading-[1.12] tracking-tight">
               Manage smarter.<br />
               <span className="text-[#0ea2f2]">Grow</span> faster.
             </h1>
-            <p className="font-['Inter'] font-medium text-[#adb6c3] text-sm sm:text-base lg:text-[18px] leading-relaxed">
+            <p className="font-['Inter'] font-medium text-[#adb6c3] text-[11px] sm:text-xs lg:text-[12.5px] leading-snug">
               Your AI-powered ecommerce<br className="hidden sm:inline" /> operating system.
             </p>
           </div>
@@ -584,24 +584,24 @@ export const HeroBanner = () => {
 
         {/* Floating 3D Dashboard Mockup Presentation (Node 94:167) */}
         <div
-          className="relative w-full my-auto py-4 sm:py-6 flex flex-col items-center gap-4 lg:gap-5"
+          className="relative w-full my-auto py-0 flex flex-col items-center gap-2 lg:gap-2.5 scale-[0.68] sm:scale-[0.72] md:scale-[0.74] lg:scale-[0.75] xl:scale-[0.78] 2xl:scale-[0.88] origin-center -my-4 sm:-my-3 transition-transform"
           data-node-id="94:167"
         >
           {/* Top Row: Mini Revenue Card (Left) + Main Dashboard Preview Window (Right) */}
-          <div className="flex items-end justify-center gap-3 sm:gap-4 w-full" data-node-id="94:165">
+          <div className="flex items-end justify-center gap-2.5 sm:gap-3 w-full" data-node-id="94:165">
             <RevenueMetricCard />
             <DashboardPreviewWindow />
           </div>
 
           {/* Bottom Row: AI Recommendation Card (Left) + Inventory Status Gauge (Right) */}
-          <div className="flex items-start justify-center gap-3 sm:gap-4 w-full" data-node-id="94:134">
+          <div className="flex items-start justify-center gap-2.5 sm:gap-3 w-full" data-node-id="94:134">
             <AiRecommendationCard />
             <InventoryStatusCard />
           </div>
         </div>
 
         {/* Footer Micro Tag */}
-        <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-[#7d96b9] font-medium">
+        <div className="pt-1.5 border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] text-[#7d96b9] font-medium shrink-0 mb-0.5">
           <span>MarketFlow AI</span>
           <span>Enterprise E-Commerce Cloud</span>
         </div>

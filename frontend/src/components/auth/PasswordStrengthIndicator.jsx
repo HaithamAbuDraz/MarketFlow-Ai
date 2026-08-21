@@ -23,20 +23,20 @@ export const PasswordStrengthIndicator = ({ password = '' }) => {
   const strength = getStrength();
 
   return (
-    <div className="bg-[#f8fafc] dark:bg-[#0c1836]/90 border border-[#e2e8f0] dark:border-[#1e3a75] rounded-[8px] p-2.5 flex flex-col gap-2 animate-fade-in select-none transition-colors duration-200">
-      <div className="flex items-center justify-between text-[11px] font-medium text-slate-700 dark:text-slate-300">
+    <div className="bg-[#f8fafc] dark:bg-[#0c1836]/90 border border-[#e2e8f0] dark:border-[#1e3a75] rounded-[8px] p-2 flex flex-col gap-1.5 animate-fade-in select-none transition-colors duration-200">
+      <div className="flex items-center justify-between text-[10.5px] font-medium text-slate-700 dark:text-slate-300">
         <span>Password must contain:</span>
         <span className={`font-semibold ${strength.text}`}>{strength.label}</span>
       </div>
 
       {/* Criteria Checklist */}
-      <div className="grid grid-cols-2 gap-1 text-[11px]">
+      <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[10.5px]">
         {requirements.map((req, idx) => (
           <div key={idx} className="flex items-center gap-1">
             {req.met ? (
-              <CheckCircle2 size={12} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
+              <CheckCircle2 size={11} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
             ) : (
-              <Circle size={12} className="text-slate-300 dark:text-slate-600 shrink-0" />
+              <Circle size={11} className="text-slate-300 dark:text-slate-600 shrink-0" />
             )}
             <span className={req.met ? 'text-slate-800 dark:text-slate-200 font-medium' : 'text-slate-500 dark:text-slate-400'}>
               {req.label}
