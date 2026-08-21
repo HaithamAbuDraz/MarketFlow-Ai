@@ -3,16 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { Search, Bell, Moon, Sun, ChevronDown, Menu, LogOut, Settings, CreditCard } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/context/ThemeContext';
+import { NotificationsDropdown } from './NotificationsDropdown';
 
 export const DashboardHeader = ({
   storeName,
   onToggleSidebar,
   onOpenNotifications,
+  onViewAllNotifications,
+  onSelectNotification,
 }) => {
   const { user, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
   const displayName = storeName || user?.store_name || user?.name || 'My Store';
   const displayEmail = user?.email || '';
@@ -87,16 +91,42 @@ export const DashboardHeader = ({
             )}
           </button>
 
-          {/* Notifications Bell */}
-          <button
-            type="button"
-            onClick={onOpenNotifications}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg border border-slate-200 dark:border-[#1e3a75] bg-white dark:bg-[#0b1633] flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#122244] relative transition-colors cursor-pointer shadow-xs"
-            title="Notifications"
-          >
-            <Bell size={18} />
-            <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white dark:ring-[#070e20]" />
-          </button>
+          {/* Notifications Bell & Dropdown (Figma Node 777:9480 & 777:8797) */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => {
+                setIsNotificationsOpen(!isNotificationsOpen);
+                setIsUserMenuOpen(false);
+                onOpenNotifications?.();
+              }}
+              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg border flex items-center justify-center relative transition-all cursor-pointer shadow-xs ${
+                isNotificationsOpen
+                  ? 'border-[#2563eb] bg-blue-50/70 dark:bg-[#0c1e48] text-[#2563eb] dark:text-[#38bdf8] ring-2 ring-blue-500/20'
+                  : 'border-slate-200 dark:border-[#1e3a75] bg-white dark:bg-[#0b1633] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#122244]'
+              }`}
+              title="Notifications"
+              aria-expanded={isNotificationsOpen}
+              aria-label="Open notifications"
+            >
+              <Bell size={18} />
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white dark:ring-[#070e20]" />
+            </button>
+
+            {/* Figma Node 777:8797 Notifications Dropdown */}
+            <NotificationsDropdown
+              isOpen={isNotificationsOpen}
+              onClose={() => setIsNotificationsOpen(false)}
+              onViewAll={() => {
+                setIsNotificationsOpen(false);
+                onViewAllNotifications?.();
+              }}
+              onSelectNotification={(item) => {
+                setIsNotificationsOpen(false);
+                onSelectNotification?.(item);
+              }}
+            />
+          </div>
 
           <div className="hidden sm:block h-6 w-px bg-slate-200 dark:bg-[#142347] mx-1" />
 

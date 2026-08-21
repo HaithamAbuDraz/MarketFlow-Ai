@@ -105,11 +105,22 @@ export const DashboardPage = () => {
 
       {/* Main Content Workspace (Offset by 240px on lg screens) */}
       <div className="flex-1 flex flex-col lg:pl-[240px] min-w-0">
-        {/* Top Navbar */}
+        {/* Top Navbar with Figma Notifications Dropdown */}
         <DashboardHeader
           storeName={storeName}
           onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
-          onOpenNotifications={() => showToast('3 low stock items need attention.')}
+          onViewAllNotifications={() => showToast('Navigating to full notifications center (18 total).')}
+          onSelectNotification={(notif) => {
+            if (notif.type === 'stock') {
+              handleManageInventory();
+            } else if (notif.type === 'order') {
+              handleViewAllOrders();
+            } else if (notif.type === 'ai') {
+              setIsAiModalOpen(true);
+            } else {
+              showToast(`${notif.title}: ${notif.description}`);
+            }
+          }}
         />
 
         {/* Toast Notification Banner */}
