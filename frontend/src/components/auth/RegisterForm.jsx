@@ -22,7 +22,7 @@ export const RegisterForm = ({
   };
 
   return (
-    <div className="w-full max-w-[360px] sm:max-w-[440px] lg:max-w-[420px] xl:max-w-[440px] bg-white dark:bg-[#091530] sm:rounded-[16px] p-4 sm:p-5 md:p-5.5 sm:shadow-[0px_4px_20px_rgba(15,34,76,0.04)] sm:border sm:border-[#eaebf0]/60 sm:dark:border-[#173066] my-auto flex flex-col justify-between animate-fade-in transition-colors duration-200">
+    <div className="w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[390px] xl:max-w-[400px] bg-white dark:bg-[#091530] sm:rounded-[16px] p-4 sm:p-5 md:p-5.5 sm:shadow-[0px_4px_20px_rgba(15,34,76,0.04)] sm:border sm:border-[#eaebf0]/60 sm:dark:border-[#173066] my-auto flex flex-col justify-between animate-fade-in transition-colors duration-200">
       <div>
         {/* Mobile Header Brand Logo (Visible on mobile screens < lg) */}
         <div className="lg:hidden flex items-center mb-3 pt-1">

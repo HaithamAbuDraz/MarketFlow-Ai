@@ -188,26 +188,26 @@ export const LoginPage = () => {
     <SplitScreenLayout>
       {/* Main Card */}
       <div
-        className="w-full max-w-[360px] sm:max-w-[450px] bg-white dark:bg-[#091530] sm:rounded-[16px] sm:p-8 sm:shadow-[0px_4px_20px_rgba(15,34,76,0.04)] sm:border sm:border-[#eaebf0]/60 sm:dark:border-[#173066] my-auto flex flex-col justify-between transition-colors duration-200"
+        className="w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[390px] xl:max-w-[400px] bg-white dark:bg-[#091530] sm:rounded-[16px] p-5 sm:p-7 md:p-7.5 sm:shadow-[0px_4px_20px_rgba(15,34,76,0.04)] sm:border sm:border-[#eaebf0]/60 sm:dark:border-[#173066] my-auto flex flex-col justify-between transition-colors duration-200"
         data-node-id="404:282"
       >
         <div>
           {/* Mobile Header Brand Logo (Visible on mobile screens <= 768px, Node 404:284) */}
-          <div className="md:hidden flex items-center mb-6 pt-1">
-            <Logo size={42} showText={false} />
+          <div className="md:hidden flex items-center mb-4 pt-1">
+            <Logo size={38} showText={false} />
           </div>
 
           {/* Title & Subtitle (Node 404:307 / 522:550) */}
-          <div className="mb-6 sm:mb-6">
-            <div className="flex items-center gap-2 mb-1.5">
-              <h2 className="font-['Inter'] font-bold text-[26px] sm:text-[28px] text-[#0f172a] dark:text-white tracking-tight leading-tight">
+          <div className="mb-4 sm:mb-5">
+            <div className="flex items-center gap-1.5 mb-1">
+              <h2 className="font-['Inter'] font-bold text-2xl sm:text-[25px] text-[#0f172a] dark:text-white tracking-tight leading-tight">
                 Welcome back
               </h2>
               <span className="inline-flex items-center justify-center p-1 rounded-md text-amber-500 bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/50 dark:border-amber-500/30 shadow-xs hover:rotate-12 transition-transform duration-200">
-                <Hand size={22} className="text-amber-500 fill-amber-400/30" />
+                <Hand size={19} className="text-amber-500 fill-amber-400/30" />
               </span>
             </div>
-            <p className="font-['Inter'] font-medium text-sm sm:text-base text-[#475569] dark:text-slate-400">
+            <p className="font-['Inter'] font-medium text-xs sm:text-[13px] text-[#475569] dark:text-slate-400">
               Manage your store with AI insights..
             </p>
           </div>
@@ -234,9 +234,8 @@ export const LoginPage = () => {
               <span className="font-medium">{error}</span>
             </div>
           )}
-
           {/* Login Form (Node 535:48033) */}
-          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 sm:gap-3.5">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3 sm:gap-2.5">
             {/* Email Input Field (Node 535:48034) */}
             <InputField
               id="loginEmail"
@@ -247,7 +246,7 @@ export const LoginPage = () => {
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
               error={fieldErrors.email}
-              inputClassName="h-[48px] sm:h-[46px] text-sm sm:text-sm"
+              inputClassName="h-[42px] sm:h-[40px] text-xs sm:text-sm"
               required
             />
 
@@ -261,12 +260,12 @@ export const LoginPage = () => {
               value={formData.password}
               onChange={(e) => handleInputChange('password', e.target.value)}
               error={fieldErrors.password}
-              inputClassName="h-[48px] sm:h-[46px] text-sm sm:text-sm"
+              inputClassName="h-[42px] sm:h-[40px] text-xs sm:text-sm"
               required
             />
 
-            {/* Remember Me & Forgot Password (Node 404:352) */}
-            <div className="flex items-center justify-between text-sm pt-0.5">
+            {/* Remember Me & Forgot Password (Node 404:354) */}
+            <div className="flex items-center justify-between pt-0.5">
               <label
                 onClick={toggleRememberMe}
                 onKeyDown={(e) => {
@@ -281,19 +280,19 @@ export const LoginPage = () => {
                 className="flex items-center gap-2 cursor-pointer text-[#777c80] dark:text-slate-400 select-none group outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
               >
                 <div
-                  className={`w-4.5 h-4.5 rounded-[4px] border flex items-center justify-center transition-colors cursor-pointer ${formData.rememberMe
+                  className={`w-4 h-4 rounded-[4px] border flex items-center justify-center transition-colors cursor-pointer ${formData.rememberMe
                       ? 'bg-[#2563eb] border-[#2563eb] text-white'
                       : 'border-[#cbd5e1] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] group-hover:border-[#94a3b8]'
                     }`}
                 >
-                  {formData.rememberMe && <Check size={12} strokeWidth={3} />}
+                  {formData.rememberMe && <Check size={11} strokeWidth={3} />}
                 </div>
-                <span className="text-sm font-normal text-[#777c80] dark:text-slate-400">Remember me</span>
+                <span className="text-xs sm:text-[13px] font-normal text-[#777c80] dark:text-slate-400">Remember me</span>
               </label>
 
               <Link
                 to="/forgot-password"
-                className="font-['Inter'] font-medium text-sm text-[#2563eb] dark:text-[#38bdf8] hover:text-blue-700 dark:hover:text-blue-300 hover:underline cursor-pointer transition-colors"
+                className="font-['Inter'] font-medium text-xs sm:text-[13px] text-[#2563eb] dark:text-[#38bdf8] hover:text-blue-700 dark:hover:text-blue-300 hover:underline cursor-pointer transition-colors"
               >
                 Forgot password ?
               </Link>
@@ -306,15 +305,15 @@ export const LoginPage = () => {
               isLoading={isSubmitting}
               loadingText="Logging in..."
               size="lg"
-              className="h-[50px] sm:h-[48px] text-base font-semibold mt-1"
+              className="h-[42px] sm:h-[40px] text-xs sm:text-sm font-semibold mt-0.5"
             >
               Login
             </Button>
 
             {/* OR Divider (Node 404:364) */}
-            <div className="flex items-center my-1 text-center">
+            <div className="flex items-center my-0.5 text-center">
               <div className="flex-1 border-t border-[#e2e8f0] dark:border-[#1e3a75]/60" />
-              <span className="px-3 font-['Inter'] font-medium text-xs sm:text-xs text-[#475569] dark:text-slate-400 uppercase tracking-wider">
+              <span className="px-2.5 font-['Inter'] font-medium text-[10px] sm:text-[11px] text-[#475569] dark:text-slate-400 uppercase tracking-wider">
                 OR
               </span>
               <div className="flex-1 border-t border-[#e2e8f0] dark:border-[#1e3a75]/60" />
@@ -325,16 +324,16 @@ export const LoginPage = () => {
               type="button"
               onClick={handleGoogleLogin}
               disabled={isSubmitting}
-              className="w-full h-[50px] sm:h-[48px] bg-white dark:bg-[#0b1633] hover:bg-slate-50 dark:hover:bg-[#122244] active:bg-slate-100 dark:active:bg-[#152a55] border border-[#e2e8f0] dark:border-[#1e3a75] text-[#0f172a] dark:text-white font-semibold text-sm sm:text-base rounded-[8px] flex items-center justify-center gap-2.5 transition-all duration-150 cursor-pointer shadow-sm hover:border-slate-300 dark:hover:border-slate-600"
+              className="w-full h-[40px] sm:h-[38px] bg-white dark:bg-[#0b1633] hover:bg-slate-50 dark:hover:bg-[#122244] active:bg-slate-100 dark:active:bg-[#152a55] border border-[#e2e8f0] dark:border-[#1e3a75] text-[#0f172a] dark:text-white font-semibold text-xs sm:text-[13px] rounded-[8px] flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer shadow-sm hover:border-slate-300 dark:hover:border-slate-600"
             >
-              <img src={googleIcon} alt="Google" className="w-5 h-5 object-contain" />
+              <img src={googleIcon} alt="Google" className="w-4.5 h-4.5 object-contain" />
               <span>Continue with Google</span>
             </button>
           </form>
         </div>
 
         {/* Footer Link (Node 404:375) */}
-        <div className="text-center mt-6 pt-3 text-sm sm:text-base text-[#475569] dark:text-slate-400">
+        <div className="text-center mt-4 pt-2 text-xs sm:text-sm text-[#475569] dark:text-slate-400">
           <span className="font-normal font-['Inter']">Don't have an Account? </span>
           <Link
             to="/register"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { HeroBanner } from '@/components/hero';
+import { SplitScreenLayout } from '@/components/layout/SplitScreenLayout';
 import {
   RegisterForm,
   EmailVerificationStep,
@@ -148,44 +148,38 @@ export const RegisterPage = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen w-full overflow-hidden bg-[#060c1c]">
-      {/* Left Column: Figma 3D Hero Banner */}
-      <HeroBanner />
+    <SplitScreenLayout>
+      {step === 'FORM' && (
+        <RegisterForm
+          formData={formData}
+          setFormData={setFormData}
+          fieldErrors={fieldErrors}
+          error={error}
+          isSubmitting={isSubmitting}
+          onSubmit={handleSubmit}
+          onOpenModal={(title) => setModalConfig({ isOpen: true, title })}
+          onGoogleSignUp={() => setStep('VERIFY_EMAIL')}
+        />
+      )}
 
-      {/* Right Column: Dynamic Form Container */}
-      <div className="flex-1 lg:flex-[0.92] xl:flex-[0.95] flex items-center justify-center bg-[#f8f8fb] dark:bg-[#070d1e] p-2 sm:p-3 lg:p-4 h-full max-h-screen overflow-y-auto no-scrollbar transition-colors duration-200">
-        {step === 'FORM' && (
-          <RegisterForm
-            formData={formData}
-            setFormData={setFormData}
-            fieldErrors={fieldErrors}
-            error={error}
-            isSubmitting={isSubmitting}
-            onSubmit={handleSubmit}
-            onOpenModal={(title) => setModalConfig({ isOpen: true, title })}
-            onGoogleSignUp={() => setStep('VERIFY_EMAIL')}
-          />
-        )}
+      {step === 'VERIFY_EMAIL' && (
+        <EmailVerificationStep
+          email={formData.email}
+          resendTimer={resendTimer}
+          canResend={canResend}
+          onResendEmail={handleResendEmail}
+          onUseDifferentEmail={() => setStep('FORM')}
+          onContinue={() => setStep('ACCOUNT_READY')}
+        />
+      )}
 
-        {step === 'VERIFY_EMAIL' && (
-          <EmailVerificationStep
-            email={formData.email}
-            resendTimer={resendTimer}
-            canResend={canResend}
-            onResendEmail={handleResendEmail}
-            onUseDifferentEmail={() => setStep('FORM')}
-            onContinue={() => setStep('ACCOUNT_READY')}
-          />
-        )}
-
-        {step === 'ACCOUNT_READY' && (
-          <AccountReadyStep
-            storeName={formData.storeName}
-            email={formData.email}
-            onSetupStore={handleStartOnboarding}
-          />
-        )}
-      </div>
+      {step === 'ACCOUNT_READY' && (
+        <AccountReadyStep
+          storeName={formData.storeName}
+          email={formData.email}
+          onSetupStore={handleStartOnboarding}
+        />
+      )}
 
       {/* Terms & Privacy Modal */}
       <TermsModal
@@ -193,7 +187,7 @@ export const RegisterPage = () => {
         title={modalConfig.title}
         onClose={() => setModalConfig({ isOpen: false, title: '' })}
       />
-    </div>
+    </SplitScreenLayout>
   );
 };
 

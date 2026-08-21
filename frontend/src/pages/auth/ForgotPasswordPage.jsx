@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Mail, Lock, KeyRound, ArrowLeft, CheckCircle2, AlertCircle, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
-import { HeroBanner } from '@/components/hero';
+import { SplitScreenLayout } from '@/components/layout/SplitScreenLayout';
 import { InputField, Button, Logo } from '@/components/common';
 import { PasswordStrengthIndicator } from '@/components/auth/PasswordStrengthIndicator';
 import emailVerifyIcon from '@/assets/illustrations/email-verify-monitor.svg';
@@ -163,17 +163,12 @@ export const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen w-full bg-white dark:bg-[#050a18] sm:bg-[#f8f8fb] sm:dark:bg-[#070d1e] lg:bg-[#060c1c] overflow-y-auto lg:overflow-hidden transition-colors duration-200">
-      {/* Left Column: Figma 3D Hero Banner (Hidden on Mobile < lg, Node 94:126) */}
-      <HeroBanner />
-
-      {/* Right Column: Responsive Form Container (Node 401:54) */}
-      <div className="flex-1 lg:flex-[0.95] flex flex-col items-center justify-between min-h-screen lg:min-h-full bg-white dark:bg-[#070d1e] sm:bg-[#f8f8fb] sm:dark:bg-[#070d1e] px-4 py-6 sm:p-6 lg:p-8 overflow-y-auto no-scrollbar transition-colors duration-200">
-        {/* Main Elevated Card */}
-        <div 
-          className="w-full max-w-[360px] sm:max-w-[450px] bg-white dark:bg-[#091530] sm:rounded-[16px] sm:p-8 sm:shadow-[0px_4px_20px_rgba(15,34,76,0.04)] sm:border sm:border-[#eaebf0]/60 sm:dark:border-[#173066] my-auto flex flex-col justify-between animate-fade-in transition-colors duration-200"
-          data-node-id="401:54"
-        >
+    <SplitScreenLayout>
+      {/* Main Elevated Card */}
+      <div 
+        className="w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[390px] xl:max-w-[400px] bg-white dark:bg-[#091530] sm:rounded-[16px] p-5 sm:p-7 md:p-7.5 sm:shadow-[0px_4px_20px_rgba(15,34,76,0.04)] sm:border sm:border-[#eaebf0]/60 sm:dark:border-[#173066] my-auto flex flex-col justify-between animate-fade-in transition-colors duration-200"
+        data-node-id="401:54"
+      >
           <div>
             {/* Mobile Header Brand Logo (Visible on mobile screens < lg) */}
             <div className="lg:hidden flex items-center mb-6 pt-1">
@@ -208,34 +203,34 @@ export const ForgotPasswordPage = () => {
 
                 {/* Email Form */}
                 <form onSubmit={handleRequestResetLink} noValidate className="flex flex-col gap-4 sm:gap-3.5">
-                  <InputField
-                    id="resetEmail"
-                    label="Email"
-                    type="email"
-                    icon={Mail}
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: '' }));
-                      if (error) setError('');
-                    }}
-                    error={Array.isArray(fieldErrors.email) ? fieldErrors.email[0] : fieldErrors.email}
-                    inputClassName="h-[48px] sm:h-[46px] text-sm"
-                    required
-                    autoFocus
-                  />
+                    {/* Email Input Field */}
+                    <InputField
+                      id="resetEmail"
+                      label="Email Address"
+                      type="email"
+                      icon={Mail}
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: '' }));
+                      }}
+                      error={fieldErrors.email}
+                      inputClassName="h-[42px] sm:h-[40px] text-xs sm:text-sm"
+                      required
+                    />
 
-                  <Button
-                    type="submit"
-                    fullWidth
-                    isLoading={isSubmitting}
-                    loadingText="Sending reset link..."
-                    size="lg"
-                    className="h-[50px] sm:h-[48px] text-base font-semibold mt-1"
-                  >
-                    Send Reset Link
-                  </Button>
+                    {/* Submit Action Button */}
+                    <Button
+                      type="submit"
+                      fullWidth
+                      isLoading={isSubmitting}
+                      loadingText="Sending reset link..."
+                      size="lg"
+                      className="h-[42px] sm:h-[40px] text-xs sm:text-sm font-semibold mt-0.5"
+                    >
+                      Send Reset Link
+                    </Button>
                 </form>
               </div>
             )}
@@ -433,8 +428,7 @@ export const ForgotPasswordPage = () => {
           <ShieldCheck size={14} className="shrink-0 text-slate-400 dark:text-slate-500" />
           <span>MarketFlow AI Secure Authentication</span>
         </div>
-      </div>
-    </div>
+      </SplitScreenLayout>
   );
 };
 

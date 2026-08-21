@@ -551,7 +551,7 @@ const AtmosphericBackground = () => (
 export const HeroBanner = () => {
   return (
     <div
-      className="hidden lg:flex relative flex-col justify-between flex-1 lg:flex-[1.08] h-full max-h-screen overflow-hidden bg-[#060c1c] p-3 sm:p-4 lg:p-4.5 xl:p-5 2xl:p-7 select-none"
+      className="hidden md:flex relative flex-col justify-between w-full h-full max-h-screen overflow-hidden bg-[#060c1c] p-3.5 sm:p-4 md:p-5 select-none"
       data-node-id="94:126"
     >
       {/* Background Lighting and Atmospheric Effects */}
@@ -582,9 +582,9 @@ export const HeroBanner = () => {
           </div>
         </div>
 
-        {/* Floating 3D Dashboard Mockup Presentation (Node 94:167) */}
+        {/* Floating 3D Dashboard Mockup Presentation - Static Fixed Size on all desktop screens */}
         <div
-          className="relative w-full my-auto py-0 flex flex-col items-center gap-2 lg:gap-2.5 scale-[0.68] sm:scale-[0.72] md:scale-[0.74] lg:scale-[0.75] xl:scale-[0.78] 2xl:scale-[0.88] origin-center -my-4 sm:-my-3 transition-transform"
+          className="relative w-full my-auto py-0 flex flex-col items-center gap-2 scale-[0.74] origin-center -my-3 transition-transform"
           data-node-id="94:167"
         >
           {/* Top Row: Mini Revenue Card (Left) + Main Dashboard Preview Window (Right) */}

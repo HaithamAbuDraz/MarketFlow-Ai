@@ -68,18 +68,18 @@ export const SplitScreenLayout = ({
     <div
       className={`flex flex-col md:flex-row min-h-screen md:h-screen w-full bg-white dark:bg-[#050a18] md:bg-[#060c1c] overflow-y-auto md:overflow-hidden transition-colors duration-200 ${containerClassName}`}
     >
-      {/* Fixed Sticky Hero Banner Container (Desktop Only) */}
+      {/* Fixed Sticky Hero Banner Container (Desktop Only - Static 55% Width) */}
       <aside
-        className="hidden md:flex md:w-[48%] lg:w-[50%] xl:w-[52%] h-screen sticky top-0 left-0 overflow-hidden shrink-0 z-10 select-none"
+        className="hidden md:flex md:w-[55%] h-screen max-h-screen sticky top-0 left-0 overflow-hidden shrink-0 z-10 select-none"
         aria-label="Product Showcase and Insights"
       >
         {heroBanner}
       </aside>
 
-      {/* Main Content Side */}
+      {/* Main Content Side (Static 45% Width) */}
       <main
         ref={scrollContainerRef}
-        className={`flex-1 w-full md:w-[52%] lg:w-[50%] xl:w-[48%] min-h-screen md:min-h-full bg-white dark:bg-[#070d1e] sm:bg-[#f8f8fb] sm:dark:bg-[#070d1e] overflow-y-auto overflow-x-hidden md:custom-scrollbar no-scrollbar relative z-20 transition-colors duration-200 ${contentClassName}`}
+        className={`flex-1 w-full md:w-[45%] min-h-screen md:min-h-full bg-white dark:bg-[#070d1e] sm:bg-[#f8f8fb] sm:dark:bg-[#070d1e] overflow-y-auto overflow-x-hidden md:custom-scrollbar no-scrollbar relative z-20 transition-colors duration-200 ${contentClassName}`}
       >
         <div
           ref={zoomContentRef}
