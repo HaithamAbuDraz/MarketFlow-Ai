@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, CheckCircle2, AlertCircle, Check, Hand } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { SplitScreenLayout } from '@/components/layout';
 import { ForgotPasswordModal } from '@/components/auth';
 import { InputField, Button, Logo } from '@/components/common';
+import { encryptSecure, decryptSecure } from '@/utils/crypto';
 import googleIcon from '@/assets/icons/google-icon.svg';
+
+const REMEMBER_EMAIL_KEY = 'marketflow_remember_email';
+const REMEMBER_PASSWORD_KEY = 'marketflow_remember_password';
+const REMEMBER_ME_KEY = 'marketflow_remember_me';
 
 export const LoginPage = () => {
   const { login } = useAuth();
@@ -24,6 +29,41 @@ export const LoginPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
 
+  // Restore remembered credentials on mount using AES-GCM 256-bit decryption
+  useEffect(() => {
+    let isMounted = true;
+    const restoreCredentials = async () => {
+      try {
+        const savedEmail = localStorage.getItem(REMEMBER_EMAIL_KEY);
+        const savedEncodedPass = localStorage.getItem(REMEMBER_PASSWORD_KEY);
+        const isRemembered = localStorage.getItem(REMEMBER_ME_KEY) === 'true';
+
+        if (savedEmail && isRemembered && isMounted) {
+          let savedPass = '';
+          if (savedEncodedPass) {
+            savedPass = await decryptSecure(savedEncodedPass);
+          }
+
+          if (isMounted) {
+            setFormData((prev) => ({
+              ...prev,
+              email: savedEmail,
+              password: savedPass,
+              rememberMe: true,
+            }));
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load remembered credentials:', err);
+      }
+    };
+
+    restoreCredentials();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (fieldErrors[field]) {
@@ -36,6 +76,22 @@ export const LoginPage = () => {
     if (error) {
       setError('');
     }
+  };
+
+  const toggleRememberMe = () => {
+    setFormData((prev) => {
+      const nextVal = !prev.rememberMe;
+      if (!nextVal) {
+        try {
+          localStorage.removeItem(REMEMBER_EMAIL_KEY);
+          localStorage.removeItem(REMEMBER_PASSWORD_KEY);
+          localStorage.removeItem(REMEMBER_ME_KEY);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      return { ...prev, rememberMe: nextVal };
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -63,7 +119,23 @@ export const LoginPage = () => {
 
     try {
       setIsSubmitting(true);
-      const res = await login(formData.email.trim(), formData.password);
+      const emailToSubmit = formData.email.trim();
+      const res = await login(emailToSubmit, formData.password);
+
+      // Handle Remember Me persistence with AES-GCM 256-bit encrypted password
+      if (formData.rememberMe) {
+        localStorage.setItem(REMEMBER_EMAIL_KEY, emailToSubmit);
+        if (formData.password) {
+          const encryptedPass = await encryptSecure(formData.password);
+          localStorage.setItem(REMEMBER_PASSWORD_KEY, encryptedPass);
+        }
+        localStorage.setItem(REMEMBER_ME_KEY, 'true');
+      } else {
+        localStorage.removeItem(REMEMBER_EMAIL_KEY);
+        localStorage.removeItem(REMEMBER_PASSWORD_KEY);
+        localStorage.removeItem(REMEMBER_ME_KEY);
+      }
+
       setIsMockMode(!!res.isMock);
       setSuccessMsg(
         `Welcome back, ${res.user?.store_name || res.user?.name || res.user?.email}! Redirecting to Dashboard...`
@@ -196,15 +268,23 @@ export const LoginPage = () => {
             {/* Remember Me & Forgot Password (Node 404:352) */}
             <div className="flex items-center justify-between text-sm pt-0.5">
               <label
-                onClick={() => setFormData((prev) => ({ ...prev, rememberMe: !prev.rememberMe }))}
-                className="flex items-center gap-2 cursor-pointer text-[#777c80] dark:text-slate-400 select-none group"
+                onClick={toggleRememberMe}
+                onKeyDown={(e) => {
+                  if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    toggleRememberMe();
+                  }
+                }}
+                tabIndex={0}
+                role="checkbox"
+                aria-checked={formData.rememberMe}
+                className="flex items-center gap-2 cursor-pointer text-[#777c80] dark:text-slate-400 select-none group outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
               >
                 <div
-                  className={`w-4.5 h-4.5 rounded-[4px] border flex items-center justify-center transition-colors cursor-pointer ${
-                    formData.rememberMe
+                  className={`w-4.5 h-4.5 rounded-[4px] border flex items-center justify-center transition-colors cursor-pointer ${formData.rememberMe
                       ? 'bg-[#2563eb] border-[#2563eb] text-white'
                       : 'border-[#cbd5e1] dark:border-[#1e3a75] bg-white dark:bg-[#0c1836] group-hover:border-[#94a3b8]'
-                  }`}
+                    }`}
                 >
                   {formData.rememberMe && <Check size={12} strokeWidth={3} />}
                 </div>
