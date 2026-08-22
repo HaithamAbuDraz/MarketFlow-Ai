@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Sparkles, X, Send, Bot } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -15,6 +15,15 @@ export const AiFloatingWidget = ({ storeName }) => {
     },
   ]);
   const [input, setInput] = useState('');
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSend = (e) => {
     e.preventDefault();
@@ -25,8 +34,12 @@ export const AiFloatingWidget = ({ storeName }) => {
     const currentInput = input;
     setInput('');
 
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
     // Simulated instant smart AI response
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       let reply = "I'm analyzing your store catalog and inventory data...";
       const lower = currentInput.toLowerCase();
       if (lower.includes('product') || lower.includes('add')) {

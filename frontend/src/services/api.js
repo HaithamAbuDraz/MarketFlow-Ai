@@ -1,10 +1,26 @@
 /**
  * MarketFlow-AI API Client Wrapper
  * Configured for Laravel Sanctum backend (app/Http/Controllers/Api/AuthController.php)
- * Includes seamless mock fallback for offline frontend testing when Laravel backend is not running.
+ *
+ * Mock fallback is DISABLED by default.
+ * To enable during development only, set in your .env:
+ *   VITE_ENABLE_MOCK_API=true
+ *
+ * SECURITY NOTE: Mock mode must NEVER activate automatically in production.
+ * A backend outage must surface as a real error — not a silent fake success.
  */
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+
+/**
+ * Mock mode is ONLY permitted when:
+ *  1. Vite is running in development mode (import.meta.env.DEV), AND
+ *  2. The explicit opt-in flag VITE_ENABLE_MOCK_API=true is set.
+ *
+ * This means production builds can never silently fall through to mocks,
+ * even if the backend is unreachable.
+ */
+const MOCK_ENABLED = import.meta.env.DEV && import.meta.env.VITE_ENABLE_MOCK_API === 'true';
 
 export const apiClient = async (endpoint, { method = 'GET', data = null, headers = {} } = {}) => {
   const token = localStorage.getItem('marketflow_token');
@@ -64,17 +80,29 @@ export const apiClient = async (endpoint, { method = 'GET', data = null, headers
 
     return result;
   } catch (error) {
-    // If connection to localhost:8000 failed (backend server offline during frontend dev)
-    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-      console.warn(`[MarketFlow API] Backend offline at ${API_BASE_URL}${endpoint}. Using mock session.`);
+    // Only use mock fallback if explicitly enabled for development.
+    // A fetch TypeError (network/connection error) in production must
+    // propagate as a real error so users see "backend unavailable".
+    if (
+      error.name === 'TypeError' &&
+      error.message.toLowerCase().includes('fetch') &&
+      MOCK_ENABLED
+    ) {
+      console.warn(
+        `[MarketFlow API] Mock mode active. Backend offline at ${API_BASE_URL}${endpoint}.`
+      );
       return handleMockFallback(endpoint, method, data);
     }
+
     throw error;
   }
 };
 
 /**
- * Mock simulation of Laravel AuthController endpoints for local testing
+ * Mock simulation of Laravel AuthController endpoints.
+ *
+ * ONLY reachable when VITE_ENABLE_MOCK_API=true in a DEV build.
+ * This function must never be called in production.
  */
 function handleMockFallback(endpoint, method, data) {
   return new Promise((resolve, reject) => {
@@ -121,28 +149,17 @@ function handleMockFallback(endpoint, method, data) {
           break;
         }
 
-        case '/auth/forgot-password': {
-          const email = (data?.email || '').toLowerCase().trim();
-          if (email.includes('notfound') || email.includes('unknown') || email === 'test@test.com') {
-            const err = new Error('We could not find an account associated with this email address. Please verify and try again.');
-            err.status = 422;
-            err.errors = { email: ['We could not find an account associated with this email address. Please verify and try again.'] };
-            reject(err);
-            break;
-          }
+        case '/auth/forgot-password':
+          // Generic response — does not reveal user existence (matching backend behaviour).
           resolve({
-            status: 'success',
-            message: 'Password reset link sent to your email! (Mock mode)',
-            reset_token: 'mock_reset_token_' + Math.random().toString(36).substring(2),
+            message: 'If an account exists for this email, a reset link has been sent. (Mock mode)',
             isMock: true,
           });
           break;
-        }
 
         case '/auth/reset-password':
           resolve({
-            status: 'success',
-            message: 'Password reset successful! You can now log in. (Mock mode)',
+            message: 'Your password has been reset successfully. Please log in. (Mock mode)',
             isMock: true,
           });
           break;
@@ -167,7 +184,6 @@ function handleMockFallback(endpoint, method, data) {
         case '/onboarding/preferences':
         case '/onboarding/complete':
           resolve({
-            status: 'success',
             message: 'Onboarding step saved successfully (Mock mode)',
             data: data || {},
             isMock: true,
@@ -179,7 +195,7 @@ function handleMockFallback(endpoint, method, data) {
           break;
 
         default:
-          reject(new Error(`Endpoint ${endpoint} not implemented in mock mode.`));
+          reject(new Error(`Endpoint ${endpoint} not available. Backend is offline.`));
       }
     }, 200);
   });

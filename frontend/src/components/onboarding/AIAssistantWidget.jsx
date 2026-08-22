@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import robotIcon from '@/assets/onboarding/robot-icon.svg';
 import { X, Sparkles, Send, Lightbulb, CheckCircle2 } from 'lucide-react';
 
@@ -60,6 +60,15 @@ export const AIAssistantWidget = ({ currentStep = 1, storeName = '' }) => {
   ]);
   const [inputVal, setInputVal] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const tips = STEP_TIPS[currentStep] || STEP_TIPS[1];
 
@@ -73,7 +82,11 @@ export const AIAssistantWidget = ({ currentStep = 1, storeName = '' }) => {
 
     setIsTyping(true);
 
-    setTimeout(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
       let aiReply = `Great question! `;
       if (text.toLowerCase().includes('category') || text.toLowerCase().includes('niche')) {
         aiReply += `For your store, selecting the most precise category helps our AI pricing algorithms benchmark your products against the most relevant competitors.`;
