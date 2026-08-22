@@ -24,7 +24,7 @@ describe('LoginPage Integration Tests', () => {
     renderWithProviders(<LoginPage />);
 
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^password$/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /^login$/i })).toBeInTheDocument();
     expect(screen.getByRole('checkbox', { name: /remember me/i })).toBeInTheDocument();
   });
@@ -36,7 +36,7 @@ describe('LoginPage Integration Tests', () => {
     const submitBtn = screen.getByRole('button', { name: /^login$/i });
     await user.click(submitBtn);
 
-    expect(screen.getByText(/please enter your email address/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/please enter your email address/i).length).toBeGreaterThan(0);
   });
 
   it('logs in successfully and persists token on valid credentials', async () => {
@@ -44,7 +44,7 @@ describe('LoginPage Integration Tests', () => {
     renderWithProviders(<LoginPage />);
 
     await user.type(screen.getByLabelText(/email/i), 'seller@test.com');
-    await user.type(screen.getByLabelText(/password/i), 'ValidPass123!');
+    await user.type(screen.getByLabelText(/^password$/i), 'ValidPass123!');
 
     const submitBtn = screen.getByRole('button', { name: /^login$/i });
     await user.click(submitBtn);

@@ -55,7 +55,7 @@ export const handlers = [
   // Auth me mock handler
   http.get('http://localhost:8000/api/auth/me', ({ request }) => {
     const authHeader = request.headers.get('Authorization');
-    if (!authHeader || !authHeader.includes('Bearer')) {
+    if (!authHeader || !authHeader.includes('Bearer') || authHeader.includes('expired_token')) {
       return HttpResponse.json(
         { status: 'error', message: 'Unauthenticated. Please log in to continue.' },
         { status: 401 }
