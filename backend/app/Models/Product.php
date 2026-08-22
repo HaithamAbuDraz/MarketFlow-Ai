@@ -2,12 +2,15 @@
 // app/Models/Product.php
 namespace App\Models;
 
+use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
+
 
     protected $fillable = [
         'store_id', 'category_id', 'title', 'slug', 'description',

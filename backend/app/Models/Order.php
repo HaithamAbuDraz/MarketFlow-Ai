@@ -10,8 +10,8 @@ class Order extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'store_id', 'customer_id', 'order_number', 'status', 'payment_status',
-        'subtotal', 'discount_amount', 'shipping_cost', 'tax_amount', 'total',
+        'store_id', 'customer_id', 'user_id', 'order_number', 'status', 'payment_status',
+        'subtotal', 'discount_amount', 'shipping_cost', 'tax_amount', 'total', 'total_amount',
         'currency', 'notes', 'paid_at', 'shipped_at', 'delivered_at'
     ];
 
@@ -44,6 +44,10 @@ class Order extends Model
 
     public function refunds() {
         return $this->hasMany(Refund::class);
+    }
+
+    public function statusHistory() {
+        return $this->hasMany(OrderStatusHistory::class);
     }
 
     public function payments() {

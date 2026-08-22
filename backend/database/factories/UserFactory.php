@@ -25,13 +25,32 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'store_name'        => fake()->company(),
+            'name'              => fake()->name(),
+            'email'             => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'password'          => static::$password ??= Hash::make('password'),
+            'role'              => 'seller',
+            'status'            => 'active',
+            'remember_token'    => Str::random(10),
         ];
     }
+
+    public function seller(): static
+    {
+        return $this->state(['role' => 'seller']);
+    }
+
+    public function customer(): static
+    {
+        return $this->state(['role' => 'customer']);
+    }
+
+    public function admin(): static
+    {
+        return $this->state(['role' => 'admin']);
+    }
+
 
     /**
      * Indicate that the model's email address should be unverified.
